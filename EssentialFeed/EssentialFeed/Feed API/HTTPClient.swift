@@ -1,5 +1,5 @@
 //
-//  HTTPClientResult.swift
+//  HTTPClient.swift
 //  EssentialFeed
 //
 //  Created by Pavel Bartashov on 9/11/2024.
