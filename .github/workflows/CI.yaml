@@ -5,9 +5,9 @@ name: Swift
 
 on:
   push:
-    branches: [ "Networking" ]
+    branches: [ "develop" ]
   pull_request:
-    branches: [ "Networking" ]
+    branches: [ "develop" ]
 
 jobs:
   build-and-test:
