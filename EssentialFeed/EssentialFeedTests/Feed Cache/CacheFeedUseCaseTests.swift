@@ -18,19 +18,17 @@ final class CacheFeedUseCaseTests: XCTestCase {
 
     func test_saveRequestsCacheDeletion() {
         let (sut, store) = makeSUT()
-        let items = [uniqueItem(), uniqueItem()]
 
-        sut.save(items) { _ in }
+        sut.save(uniqueItems().models) { _ in }
 
         XCTAssertEqual(store.receivedMessages, [.deleteCacheFeed])
     }
 
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
         let (sut, store) = makeSUT()
-        let items = [uniqueItem(), uniqueItem()]
         let deletionError = anyNSError()
 
-        sut.save(items) { _ in }
+        sut.save(uniqueItems().models) { _ in }
         store.completeDeletion(with: deletionError)
 
         XCTAssertEqual(store.receivedMessages, [.deleteCacheFeed])
@@ -39,13 +37,12 @@ final class CacheFeedUseCaseTests: XCTestCase {
     func test_save_requestsInsertionWithTimeStampOnSuccessfulDeletion() {
         let timeStamp = Date()
         let (sut, store) = makeSUT(currentDate: { timeStamp })
-        let items = [uniqueItem(), uniqueItem()]
-        let localItems = items.map { LocalFeedItem(id: $0.id, description: $0.description, location: $0.location, imageURL: $0.imageURL) }
+        let items = uniqueItems()
 
-        sut.save(items) { _ in }
+        sut.save(items.models) { _ in }
         store.completeDeletionSuccessfully()
 
-        XCTAssertEqual(store.receivedMessages, [.deleteCacheFeed, .insert(localItems, timeStamp)])
+        XCTAssertEqual(store.receivedMessages, [.deleteCacheFeed, .insert(items.local, timeStamp)])
     }
 
     func test_save_failsOnDeletionError() {
@@ -90,7 +87,6 @@ final class CacheFeedUseCaseTests: XCTestCase {
         }
 
         sut = nil
-
         store.completeDeletion(with: anyNSError())
 
         XCTAssertTrue(receivedResults.isEmpty)
@@ -155,12 +151,19 @@ final class CacheFeedUseCaseTests: XCTestCase {
         FeedItem(id: UUID(), description: "any", location: "any", imageURL: anyURL())
     }
 
+    private func uniqueItems() -> (models: [FeedItem], local: [LocalFeedItem]) {
+        let items = [uniqueItem(), uniqueItem()]
+        let localItems = items.map { LocalFeedItem(id: $0.id, description: $0.description, location: $0.location, imageURL: $0.imageURL) }
+
+        return (items, localItems)
+    }
+
     private func anyURL() -> URL {
         URL(string: "http://any-url.com")!
     }
 
     private func anyNSError() -> NSError {
-        return NSError(domain: "any error", code: 0)
+        NSError(domain: "any error", code: 0)
     }
 
     private class FeedStoreSpy: FeedStore {
