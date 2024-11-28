@@ -1,5 +1,5 @@
 //
-//  XCTTestCase+MemeoryLeakTracking.swift
+//  XCTTestCase+MemoryLeakTracking.swift
 //  EssentialFeed
 //
 //  Created by Pavel Bartashov on 14/11/2024.
