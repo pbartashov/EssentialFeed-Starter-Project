@@ -82,7 +82,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
         let store = FeedStoreSpy()
         var sut: LocalFeedLoader? = LocalFeedLoader(store: store, currentDate: Date.init)
 
-        var receivedResults = [Error?]()
+        var receivedResults = [LocalFeedLoader.SaveResult?]()
 
         sut?.save([uniqueItem()]) { error in
             receivedResults.append(error)
@@ -99,7 +99,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
         let store = FeedStoreSpy()
         var sut: LocalFeedLoader? = LocalFeedLoader(store: store, currentDate: Date.init)
 
-        var receivedResults = [Error?]()
+        var receivedResults = [LocalFeedLoader.SaveResult?]()
 
         sut?.save([uniqueItem()]) { error in
             receivedResults.append(error)
@@ -137,7 +137,7 @@ final class CacheFeedUseCaseTests: XCTestCase {
     ) {
         let exp = expectation(description: "Wait for completion")
 
-        var receivedError: Error?
+        var receivedError: LocalFeedLoader.SaveResult?
         sut.save([uniqueItem()]) { error in
             receivedError = error
             exp.fulfill()
