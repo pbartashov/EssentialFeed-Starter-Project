@@ -16,12 +16,29 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [])
     }
 
-    func test_load_RequestsCacheRetrieval() {
+    func test_load_requestsCacheRetrieval() {
         let (sut, store) = makeSUT()
 
-        sut.load()
+        sut.load { _ in }
 
         XCTAssertEqual(store.receivedMessages, [.retrieve])
+    }
+
+    func test_load_failsOnRetrievalError() {
+        let (sut, store) = makeSUT()
+        let retrievalError = anyNSError()
+        let exp = expectation(description: "Wait for load completion")
+
+        var receivedError: Error?
+        sut.load { error in
+            receivedError = error
+            exp.fulfill()
+        }
+
+        store.completeRetrieval(with: retrievalError)
+        wait(for: [exp], timeout: 1)
+
+        XCTAssertEqual(receivedError as? NSError, retrievalError)
     }
 
     // MARK: - Helpers
@@ -38,43 +55,6 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
 
         return (sut, store)
-    }
-
-    private func expect(
-        _ sut: LocalFeedLoader,
-        toCompleteWithError expectedError: NSError?,
-        when action: () -> Void,
-        file: StaticString = #filePath,
-        line: UInt = #line
-    ) {
-        let exp = expectation(description: "Wait for completion")
-
-        var receivedError: LocalFeedLoader.SaveResult?
-        sut.save([uniqueImage()]) { error in
-            receivedError = error
-            exp.fulfill()
-        }
-
-        action()
-
-        wait(for: [exp], timeout: 1)
-
-        XCTAssertEqual(receivedError as? NSError, expectedError, file: file, line: line)
-    }
-
-    private func uniqueImage() -> FeedImage {
-        FeedImage(id: UUID(), description: "any", location: "any", url: anyURL())
-    }
-
-    private func uniqueImageFeed() -> (models: [FeedImage], local: [LocalFeedImage]) {
-        let items = [uniqueImage(), uniqueImage()]
-        let localItems = items.map { LocalFeedImage(id: $0.id, description: $0.description, location: $0.location, url: $0.url) }
-
-        return (items, localItems)
-    }
-
-    private func anyURL() -> URL {
-        URL(string: "http://any-url.com")!
     }
 
     private func anyNSError() -> NSError {
