@@ -81,14 +81,14 @@ final class RemoteFeedLoaderTests: XCTestCase {
 
         let item1 = makeItem(
             id: UUID(),
-            imageURL: URL(string: "http:///a-url.com")!
+            url: URL(string: "http:///a-url.com")!
         )
 
         let item2 = makeItem(
             id: UUID(),
             description: "a description",
             location: "a location",
-            imageURL: URL(string: "http:///another-url.com")!
+            url: URL(string: "http:///another-url.com")!
         )
 
         let items = [item1.model, item2.model]
@@ -138,15 +138,15 @@ final class RemoteFeedLoaderTests: XCTestCase {
         id: UUID,
         description: String? = nil,
         location: String? = nil,
-        imageURL: URL
-    ) -> (model: FeedItem, json: [String: Any]) {
-        let item = FeedItem(id: id, description: description, location: location, imageURL: imageURL)
+        url: URL
+    ) -> (model: FeedImage, json: [String: Any]) {
+        let item = FeedImage(id: id, description: description, location: location, url: url)
 
         let json = [
             "id": item.id.uuidString,
             "description": item.description,
             "location": item.location,
-            "image": item.imageURL.absoluteString
+            "image": item.url.absoluteString
         ].compactMapValues { $0 }
 
         return (item, json)
