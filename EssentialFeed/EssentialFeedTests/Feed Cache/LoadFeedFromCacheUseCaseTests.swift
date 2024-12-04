@@ -45,7 +45,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
         let fixedCurrentDate = Date()
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         let feed = uniqueImageFeed()
-        let nonExpiredTimestamp = fixedCurrentDate.minusFeedCacheMaxAge().addSeconds(1)
+        let nonExpiredTimestamp = fixedCurrentDate.minusFeedCacheMaxAge().adding(seconds: 1)
 
         expect(sut, toCompleteWith: .success(feed.models)) {
             store.completeRetrieval(with: feed.local, timeStamp: nonExpiredTimestamp)
@@ -67,7 +67,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
         let fixedCurrentDate = Date()
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         let feed = uniqueImageFeed()
-        let expiredTimestamp = fixedCurrentDate.minusFeedCacheMaxAge().addSeconds(-1)
+        let expiredTimestamp = fixedCurrentDate.minusFeedCacheMaxAge().adding(seconds: -1)
 
         expect(sut, toCompleteWith: .success([])) {
             store.completeRetrieval(with: feed.local,  timeStamp: expiredTimestamp)
@@ -96,7 +96,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
         let fixedCurrentDate = Date()
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         let feed = uniqueImageFeed()
-        let nonExpiredTimestamp = fixedCurrentDate.minusFeedCacheMaxAge().addSeconds(1)
+        let nonExpiredTimestamp = fixedCurrentDate.minusFeedCacheMaxAge().adding(seconds: 1)
 
         sut.load { _ in }
         store.completeRetrieval(with: feed.local, timeStamp: nonExpiredTimestamp)
@@ -120,7 +120,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
         let fixedCurrentDate = Date()
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         let feed = uniqueImageFeed()
-        let expiredTimestamp = fixedCurrentDate.minusFeedCacheMaxAge().addSeconds(-1)
+        let expiredTimestamp = fixedCurrentDate.minusFeedCacheMaxAge().adding(seconds: -1)
 
         sut.load { _ in }
         store.completeRetrieval(with: feed.local, timeStamp: expiredTimestamp)
