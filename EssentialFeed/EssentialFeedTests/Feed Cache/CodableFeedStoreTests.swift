@@ -74,8 +74,12 @@ class CodableFeedStore {
             return completion(nil)
         }
 
-        try! FileManager.default.removeItem(at: storeURL)
-        completion(nil)
+        do {
+            try FileManager.default.removeItem(at: storeURL)
+            completion(nil)
+        } catch {
+            completion(error)
+        }
     }
 }
 
@@ -185,6 +189,15 @@ final class CodableFeedStoreTests: XCTestCase {
         expect(sut, toRetrive: .empty)
     }
 
+    func test_delete_deliversErrorOnDeletionError() {
+        let noDeletePermissionURL = cachesDirectory()
+        let sut = makeSUT(storeURL: noDeletePermissionURL)
+
+        let deletionError = deleteCache(from: sut)
+
+        XCTAssertNotNil(deletionError, "Expected cache deletion to fail")
+    }
+
     // MARK: - Helpers
 
     private func makeSUT(
@@ -199,7 +212,7 @@ final class CodableFeedStoreTests: XCTestCase {
     }
 
     @discardableResult
-    func insert(
+    private func insert(
         _ cache: (feed: [LocalFeedImage], timestamp: Date),
         to sut: CodableFeedStore
     ) -> Error? {
@@ -215,7 +228,7 @@ final class CodableFeedStoreTests: XCTestCase {
     }
 
     @discardableResult
-    func deleteCache(
+    private func deleteCache(
         from sut: CodableFeedStore
     ) -> Error? {
         let exp = expectation(description: "Wait for cache deletion")
@@ -229,7 +242,7 @@ final class CodableFeedStoreTests: XCTestCase {
         return deletionError
     }
 
-    func expect(
+    private func expect(
         _ sut: CodableFeedStore,
         toRetrive expectedResult: RetriedCachedFeedResult,
         file: StaticString = #filePath,
@@ -258,7 +271,7 @@ final class CodableFeedStoreTests: XCTestCase {
         wait(for: [exp], timeout: 1)
     }
 
-    func expect(
+    private func expect(
         _ sut: CodableFeedStore,
         toRetriveTwice expectedResult: RetriedCachedFeedResult,
         file: StaticString = #filePath,
@@ -282,5 +295,9 @@ final class CodableFeedStoreTests: XCTestCase {
 
     private func deleteStoreArtifacts() {
         try? FileManager.default.removeItem(at: testSpecificStoreURL())
+    }
+
+    private func cachesDirectory() -> URL {
+        FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
     }
 }
