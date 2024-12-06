@@ -16,8 +16,8 @@ internal final class FeedCachePolicy {
         7
     }
 
-    internal static func validate(_ timeStamp: Date, against date: Date) -> Bool {
-        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timeStamp) else {
+    internal static func validate(_ timestamp: Date, against date: Date) -> Bool {
+        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
             return false
         }
 

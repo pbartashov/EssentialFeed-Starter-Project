@@ -48,7 +48,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
         let nonExpiredTimestamp = fixedCurrentDate.minusFeedCacheMaxAge().adding(seconds: 1)
 
         expect(sut, toCompleteWith: .success(feed.models)) {
-            store.completeRetrieval(with: feed.local, timeStamp: nonExpiredTimestamp)
+            store.completeRetrieval(with: feed.local, timestamp: nonExpiredTimestamp)
         }
     }
 
@@ -59,7 +59,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
         let expirationTimestamp = fixedCurrentDate.minusFeedCacheMaxAge()
 
         expect(sut, toCompleteWith: .success([])) {
-            store.completeRetrieval(with: feed.local,  timeStamp: expirationTimestamp)
+            store.completeRetrieval(with: feed.local,  timestamp: expirationTimestamp)
         }
     }
 
@@ -70,7 +70,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
         let expiredTimestamp = fixedCurrentDate.minusFeedCacheMaxAge().adding(seconds: -1)
 
         expect(sut, toCompleteWith: .success([])) {
-            store.completeRetrieval(with: feed.local,  timeStamp: expiredTimestamp)
+            store.completeRetrieval(with: feed.local,  timestamp: expiredTimestamp)
         }
     }
 
@@ -99,7 +99,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
         let nonExpiredTimestamp = fixedCurrentDate.minusFeedCacheMaxAge().adding(seconds: 1)
 
         sut.load { _ in }
-        store.completeRetrieval(with: feed.local, timeStamp: nonExpiredTimestamp)
+        store.completeRetrieval(with: feed.local, timestamp: nonExpiredTimestamp)
 
         XCTAssertEqual(store.receivedMessages, [.retrieve])
     }
@@ -111,7 +111,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
         let expirationTimestamp = fixedCurrentDate.minusFeedCacheMaxAge()
 
         sut.load { _ in }
-        store.completeRetrieval(with: feed.local, timeStamp: expirationTimestamp)
+        store.completeRetrieval(with: feed.local, timestamp: expirationTimestamp)
 
         XCTAssertEqual(store.receivedMessages, [.retrieve])
     }
@@ -123,7 +123,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
         let expiredTimestamp = fixedCurrentDate.minusFeedCacheMaxAge().adding(seconds: -1)
 
         sut.load { _ in }
-        store.completeRetrieval(with: feed.local, timeStamp: expiredTimestamp)
+        store.completeRetrieval(with: feed.local, timestamp: expiredTimestamp)
 
         XCTAssertEqual(store.receivedMessages, [.retrieve])
     }
