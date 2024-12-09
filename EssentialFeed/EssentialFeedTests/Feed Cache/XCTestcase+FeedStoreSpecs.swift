@@ -9,6 +9,159 @@ import XCTest
 import EssentialFeed
 
 extension FeedStoreSpecs where Self: XCTestCase {
+
+    func assertThatRetrieveDeliversEmptyOnEmptyCache(
+        on sut: FeedStore,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        expect(sut, toRetrive: .empty)
+
+    }
+
+    func assertThatRetrieveHasNoSideEffectsOnEmptyCache(
+        on sut: FeedStore,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        expect(sut, toRetriveTwice: .empty)
+    }
+
+    func assertThatRetrieveDeliversFoundValuesOnNonEmptyCache(
+        on sut: FeedStore,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let feed = uniqueImageFeed().local
+        let timestamp = Date()
+
+        insert((feed, timestamp), to: sut)
+
+        expect(sut, toRetrive: .found(feed: feed, timestamp: timestamp))
+    }
+
+    func assertThatRetrieveHasNoSideEffectsOnNonEmptyCache(
+        on sut: FeedStore,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let feed = uniqueImageFeed().local
+        let timestamp = Date()
+
+        insert((feed, timestamp), to: sut)
+
+        expect(sut, toRetriveTwice: .found(feed: feed, timestamp: timestamp))
+    }
+
+    func assertThatInsertDeliversNoErrorOnEmptyCache(
+        on sut: FeedStore,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let insertionError = insert((uniqueImageFeed().local, Date()), to: sut)
+
+        XCTAssertNil(insertionError, "Expected feed to be inserted successfully")
+    }
+
+    func assertThatInsertDeliversNoErrorOnNonEmptyCache(
+        on sut: FeedStore,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        insert((uniqueImageFeed().local, Date()), to: sut)
+
+        let insertionError = insert((uniqueImageFeed().local, Date()), to: sut)
+        XCTAssertNil(insertionError, "Expected feed to override cache successfully")
+    }
+
+    func assertThatInsertOverridesPreviouslyInsertedCacheValues(
+        on sut: FeedStore,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        insert((uniqueImageFeed().local, Date()), to: sut)
+
+        let latestFeed = uniqueImageFeed().local
+        let latestTimestamp = Date()
+        insert((latestFeed, latestTimestamp), to: sut)
+
+        expect(sut, toRetrive: .found(feed: latestFeed, timestamp: latestTimestamp))
+    }
+
+    func assertThatDeleteDeliversNoErrorOnEmptyCache(
+        on sut: FeedStore,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let deletionError = deleteCache(from: sut)
+
+        XCTAssertNil(deletionError, "Expected empty cache deletion to succeed")
+    }
+
+    func test_delete_hasNoSideEffectsOnEmptyCache(
+        on sut: FeedStore,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        deleteCache(from: sut)
+
+        expect(sut, toRetrive: .empty)
+    }
+
+    func assertThatDeleteDeliversNoErrorOnNonEmptyCache(
+        on sut: FeedStore,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        insert((uniqueImageFeed().local, Date()), to: sut)
+
+        let deletionError = deleteCache(from: sut)
+
+        XCTAssertNil(deletionError, "Expected non-empty cache deletion to succeed")
+    }
+
+    func assertThatDeleteEmptiesPreviouslyInsertedCache(
+        on sut: FeedStore,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        insert((uniqueImageFeed().local, Date()), to: sut)
+
+        deleteCache(from: sut)
+
+        expect(sut, toRetrive: .empty)
+    }
+
+    func assertThatSideEffectsRunSerially(
+        on sut: FeedStore,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        var completedOperationsInOrder = [XCTestExpectation]()
+
+        let op1 = expectation(description: "Operation 1")
+        sut.insert(uniqueImageFeed().local, timesStamp: Date()) { _ in
+            completedOperationsInOrder.append(op1)
+            op1.fulfill()
+        }
+
+        let op2 = expectation(description: "Operation 2")
+        sut.deleteCachedFeed { _ in
+            completedOperationsInOrder.append(op2)
+            op2.fulfill()
+        }
+
+        let op3 = expectation(description: "Operation 3")
+        sut.retrieve { _ in
+            completedOperationsInOrder.append(op3)
+            op3.fulfill()
+        }
+
+        waitForExpectations(timeout: 1)
+
+        XCTAssertEqual(completedOperationsInOrder, [op1, op2, op3], "Expected side-effects to run in order but operations finished in the wrong order")
+    }
+
     @discardableResult
     func insert(
         _ cache: (feed: [LocalFeedImage], timestamp: Date),
