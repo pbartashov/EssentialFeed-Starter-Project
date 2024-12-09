@@ -162,48 +162,6 @@ extension FeedStoreSpecs where Self: XCTestCase {
         XCTAssertEqual(completedOperationsInOrder, [op1, op2, op3], "Expected side-effects to run in order but operations finished in the wrong order")
     }
 
-    func assertThatRetrieveDeliversFailureOnRetrievalError(
-        on sut: FeedStore,
-        file: StaticString = #filePath,
-        line: UInt = #line
-    ) {
-        expect(sut, toRetrive: .failure(anyNSError()))
-    }
-
-    func assertThatRetrieveHasNoSideEffectsOnFailure(
-        on sut: FeedStore,
-        file: StaticString = #filePath,
-        line: UInt = #line
-    ) {
-        expect(sut, toRetriveTwice: .failure(anyNSError()))
-    }
-
-    func assertThatInsertDeliversErrorOnInsertionError(
-        on sut: FeedStore,
-        file: StaticString = #filePath,
-        line: UInt = #line
-    ) {
-        let feed = uniqueImageFeed().local
-        let timestamp = Date()
-
-        let insertionError = insert((feed, timestamp), to: sut)
-
-        XCTAssertNotNil(insertionError, "Expected cache insertion to fail with an error")
-    }
-
-    func assertThatInsertHasNoSideEffectsOnInsertionError(
-        on sut: FeedStore,
-        file: StaticString = #filePath,
-        line: UInt = #line
-    ) {
-        let feed = uniqueImageFeed().local
-        let timestamp = Date()
-
-        insert((feed, timestamp), to: sut)
-
-        expect(sut, toRetrive: .empty)
-    }
-
     @discardableResult
     func insert(
         _ cache: (feed: [LocalFeedImage], timestamp: Date),
