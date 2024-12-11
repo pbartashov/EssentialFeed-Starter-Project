@@ -8,18 +8,11 @@
 import XCTest
 import EssentialFeed
 
-
-//class CoreDataFeedStore {
-//
-//    init(storeURL: URL, bundle: Bundle) throws {
-//
-//    }
-//}
-
-
 final class CoreDataFeedStoreTests: XCTestCase, FeedStoreSpecs {
     func test_retrieve_deliversEmptyOnEmptyCache() {
+        let sut = makeSUT()
 
+        assertThatRetrieveDeliversEmptyOnEmptyCache(on: sut)
     }
     
     func test_retrieve_hasNoEffectsOnEmptyCache() {
@@ -70,14 +63,15 @@ final class CoreDataFeedStoreTests: XCTestCase, FeedStoreSpecs {
 
     // MARK: - Helpers
 
-//    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> FeedStore {
+    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> FeedStore {
 //        let storeBundle = Bundle(for: CoreDataFeedStore.self)
 //        let storeURL = URL(fileURLWithPath: "/dev/null")
 //        let sut = try! CoreDataFeedStore(storeURL: storeURL, bundle: storeBundle)
-//        trackForMemoryLeaks(sut, file: file, line: line)
-//
-//        return sut
-//    }
+        let sut = CoreDataFeedStore()
+        trackForMemoryLeaks(sut, file: file, line: line)
+
+        return sut
+    }
 
 
 }
