@@ -15,7 +15,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        expect(sut, toRetrive: .empty)
+        expect(sut, toRetrive: .empty, file: file, line: line)
 
     }
 
@@ -24,7 +24,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        expect(sut, toRetriveTwice: .empty)
+        expect(sut, toRetriveTwice: .empty, file: file, line: line)
     }
 
     func assertThatRetrieveDeliversFoundValuesOnNonEmptyCache(
@@ -37,7 +37,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
 
         insert((feed, timestamp), to: sut)
 
-        expect(sut, toRetrive: .found(feed: feed, timestamp: timestamp))
+        expect(sut, toRetrive: .found(feed: feed, timestamp: timestamp), file: file, line: line)
     }
 
     func assertThatRetrieveHasNoSideEffectsOnNonEmptyCache(
@@ -50,7 +50,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
 
         insert((feed, timestamp), to: sut)
 
-        expect(sut, toRetriveTwice: .found(feed: feed, timestamp: timestamp))
+        expect(sut, toRetriveTwice: .found(feed: feed, timestamp: timestamp), file: file, line: line)
     }
 
     func assertThatInsertDeliversNoErrorOnEmptyCache(
@@ -60,7 +60,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
     ) {
         let insertionError = insert((uniqueImageFeed().local, Date()), to: sut)
 
-        XCTAssertNil(insertionError, "Expected feed to be inserted successfully")
+        XCTAssertNil(insertionError, "Expected feed to be inserted successfully", file: file, line: line)
     }
 
     func assertThatInsertDeliversNoErrorOnNonEmptyCache(
@@ -71,7 +71,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         insert((uniqueImageFeed().local, Date()), to: sut)
 
         let insertionError = insert((uniqueImageFeed().local, Date()), to: sut)
-        XCTAssertNil(insertionError, "Expected feed to override cache successfully")
+        XCTAssertNil(insertionError, "Expected feed to override cache successfully", file: file, line: line)
     }
 
     func assertThatInsertOverridesPreviouslyInsertedCacheValues(
@@ -85,7 +85,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         let latestTimestamp = Date()
         insert((latestFeed, latestTimestamp), to: sut)
 
-        expect(sut, toRetrive: .found(feed: latestFeed, timestamp: latestTimestamp))
+        expect(sut, toRetrive: .found(feed: latestFeed, timestamp: latestTimestamp), file: file, line: line)
     }
 
     func assertThatDeleteDeliversNoErrorOnEmptyCache(
@@ -95,7 +95,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
     ) {
         let deletionError = deleteCache(from: sut)
 
-        XCTAssertNil(deletionError, "Expected empty cache deletion to succeed")
+        XCTAssertNil(deletionError, "Expected empty cache deletion to succeed", file: file, line: line)
     }
 
     func test_delete_hasNoSideEffectsOnEmptyCache(
@@ -105,7 +105,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
     ) {
         deleteCache(from: sut)
 
-        expect(sut, toRetrive: .empty)
+        expect(sut, toRetrive: .empty, file: file, line: line)
     }
 
     func assertThatDeleteDeliversNoErrorOnNonEmptyCache(
@@ -117,7 +117,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
 
         let deletionError = deleteCache(from: sut)
 
-        XCTAssertNil(deletionError, "Expected non-empty cache deletion to succeed")
+        XCTAssertNil(deletionError, "Expected non-empty cache deletion to succeed", file: file, line: line)
     }
 
     func assertThatDeleteEmptiesPreviouslyInsertedCache(
@@ -129,7 +129,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
 
         deleteCache(from: sut)
 
-        expect(sut, toRetrive: .empty)
+        expect(sut, toRetrive: .empty, file: file, line: line)
     }
 
     func assertThatSideEffectsRunSerially(
@@ -159,7 +159,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
 
         waitForExpectations(timeout: 1)
 
-        XCTAssertEqual(completedOperationsInOrder, [op1, op2, op3], "Expected side-effects to run in order but operations finished in the wrong order")
+        XCTAssertEqual(completedOperationsInOrder, [op1, op2, op3], "Expected side-effects to run in order but operations finished in the wrong order", file: file, line: line)
     }
 
     @discardableResult
@@ -227,7 +227,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        expect(sut, toRetrive: expectedResult)
-        expect(sut, toRetrive: expectedResult)
+        expect(sut, toRetrive: expectedResult, file: file, line: line)
+        expect(sut, toRetrive: expectedResult, file: file, line: line)
     }
 }

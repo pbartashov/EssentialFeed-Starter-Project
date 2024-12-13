@@ -29,15 +29,14 @@ public final class CoreDataFeedStore: FeedStore {
                 } else {
                     completion(.empty)
                 }
-            }        catch {
+            } catch {
                 completion(.failure(error))
             }
         }
     }
 
     public func deleteCachedFeed(_ completion: @escaping DeletionCompletion) {
-
-
+        completion(nil)
     }
 
     public func insert(_ feed: [EssentialFeed.LocalFeedImage], timesStamp: Date, completion: @escaping InsertionCompletion) {
