@@ -32,6 +32,6 @@ extension FeedStoreSpecs where Self: XCTestCase {
 
         insert((feed, timestamp), to: sut)
 
-        expect(sut, toRetrive: .success(.empty))
+        expect(sut, toRetrive: .success(.none))
     }
 }
