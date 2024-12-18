@@ -26,7 +26,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
     ) {
         deleteCache(from: sut)
 
-        expect(sut, toRetrive: .empty)
+        expect(sut, toRetrive: .success(.empty))
     }
 }
 
