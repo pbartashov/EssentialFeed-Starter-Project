@@ -98,8 +98,8 @@ final class CacheFeedUseCaseTests: XCTestCase {
 
         var receivedResults = [LocalFeedLoader.SaveResult?]()
 
-        sut?.save([uniqueImage()]) { error in
-            receivedResults.append(error)
+        sut?.save([uniqueImage()]) { result in
+            receivedResults.append(result)
         }
 
         store.completeDeletionSuccessfully()
@@ -134,14 +134,15 @@ final class CacheFeedUseCaseTests: XCTestCase {
     ) {
         let exp = expectation(description: "Wait for completion")
 
-        var receivedError: LocalFeedLoader.SaveResult?
-        sut.save([uniqueImage()]) { error in
-            receivedError = error
+        var receivedError: Error?
+        sut.save([uniqueImage()]) { result in
+            if case let .failure(error) = result {
+                receivedError = error
+            }
             exp.fulfill()
         }
 
         action()
-
         wait(for: [exp], timeout: 1)
 
         XCTAssertEqual(receivedError as? NSError, expectedError, file: file, line: line)
