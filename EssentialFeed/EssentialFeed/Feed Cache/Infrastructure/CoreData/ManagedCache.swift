@@ -8,12 +8,12 @@
 import CoreData
 
 @objc(ManagedCache)
-internal class ManagedCache: NSManagedObject {
+class ManagedCache: NSManagedObject {
     @NSManaged var timestamp: Date
     @NSManaged var feed: NSOrderedSet
 }
 
-extension ManagedCache{
+extension ManagedCache {
     var localFeed: [LocalFeedImage] {
         feed.compactMap { ($0 as? ManagedFeedImage)?.local }
     }
