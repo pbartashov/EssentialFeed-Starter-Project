@@ -38,7 +38,6 @@ extension FeedImageCell {
         desctriptionLabel.text = model.description
         desctriptionLabel.isHidden = model.description == nil
 
-        feedImageView.image = UIImage(named: model.imageName)
-
+        fadeIn(UIImage(named: model.imageName))
     }
 }
