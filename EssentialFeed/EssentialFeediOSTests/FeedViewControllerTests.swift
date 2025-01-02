@@ -205,6 +205,23 @@ final class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(loader.loadedImageURLs, [image0.url, image1.url, image0.url, image1.url], "Expected fourth image url request after second view retry action")
     }
 
+    func test_feedImageView_preloadsImageULRWhenNearVisible() {
+        let image0 = makeImage(url: URL(string: "http://url-0.com")!)
+        let image1 = makeImage(url: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [image0, image1])
+        XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image url requests until image is near visible")
+
+        sut.simulateImageViewNearVisible(at: 0)
+        XCTAssertEqual(loader.loadedImageURLs, [image0.url], "Expected first image url request once first image is near visible")
+
+
+        sut.simulateImageViewNearVisible(at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [image0.url, image1.url], "Expected second image url request once second image is near visible")
+    }
+
     // MARK: - Helpers
 
     private func makeSUT(
@@ -400,6 +417,13 @@ private extension UITableViewController {
         let indexPath = IndexPath(row: row, section: feedImageSection)
 
         delegate?.tableView?(tableView, didEndDisplaying: view!, forRowAt: indexPath)
+    }
+
+    func simulateImageViewNearVisible(at row: Int) {
+        let ds = tableView.prefetchDataSource
+        let index = IndexPath(row: row, section: feedImageSection)
+
+        ds?.tableView(tableView, prefetchRowsAt: [index])
     }
 
     func replaceRefreshControlWithFakeForiOS17Support() {
