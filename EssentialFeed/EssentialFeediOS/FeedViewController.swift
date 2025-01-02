@@ -100,7 +100,20 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
     }
 
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cancelTask(forRow: indexPath)
+        cancelTask(forRowAt: indexPath)
+    }
+
+    public override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? FeedImageCell else { return }
+        let cellModel = tableModel[indexPath.row]
+
+        self.tasks[indexPath] = self.imageLoader?.loadImageData(from: cellModel.url) { [weak cell] result in
+            let data = try? result.get()
+            let image = data.map(UIImage.init) ?? nil
+            cell?.feedImageView.image = image
+            cell?.feedImageRetryButton.isHidden = (image != nil)
+            cell?.feedImageContainer.isShimmering = false
+        }
     }
 
     public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
@@ -114,7 +127,7 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
         indexPaths.forEach(cancelTask)
     }
 
-    private func cancelTask(forRow indexPath: IndexPath) {
+    private func cancelTask(forRowAt indexPath: IndexPath) {
         tasks[indexPath]?.cancel()
         tasks[indexPath] = nil
     }
