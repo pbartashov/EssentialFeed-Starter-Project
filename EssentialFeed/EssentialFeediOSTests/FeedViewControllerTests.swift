@@ -148,6 +148,25 @@ final class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(view1?.renderedImageData, imageData1, "Expected image for second view once second image loading completes successfully")
     }
 
+    func test_feedImageViewRetryButton_isVisibleOnImageURLLoadErrors() {
+        let (sut, loader) = makeSUT()
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [makeImage(), makeImage()], at: 0)
+
+        let view0 = sut.simulateFeedImageViewVisible(at: 0)
+        let view1 = sut.simulateFeedImageViewVisible(at: 1)
+        XCTAssertEqual(view0?.isShowngRetryAction, false, "Expected no retry action for first view while loading first image")
+        XCTAssertEqual(view1?.isShowngRetryAction, false, "Expected no retry action for second view while loading second image")
+
+        let imageData = UIImage.make(withColor: .red).pngData()!
+        loader.completeImageLoading(with: imageData, at: 0)
+        XCTAssertEqual(view0?.isShowngRetryAction, false, "Expected no retry action for first view once first image loading completes successfully")
+        XCTAssertEqual(view1?.isShowngRetryAction, false, "Expected no retry action state change for second view once first image loading completes successfully")
+
+        loader.completeImageLoadingWithError(at: 1)
+        XCTAssertEqual(view0?.isShowngRetryAction, false, "Expected no retry action state change for first view once second image loading completes with error")
+        XCTAssertEqual(view1?.isShowngRetryAction, true, "Expected retry action for second view once second image loading completes with error")
+    }
 
     // MARK: - Helpers
 
@@ -351,7 +370,7 @@ private extension UITableViewController {
 
 private extension FeedImageCell {
     var isShowingLocation: Bool {
-        locationContainer.isHidden == false
+        !locationContainer.isHidden
     }
 
     var locationText: String? {
@@ -368,6 +387,10 @@ private extension FeedImageCell {
 
     var renderedImageData: Data? {
         feedImageView.image?.pngData()
+    }
+
+    var isShowngRetryAction: Bool {
+        !retryButton.isHidden
     }
 }
 
