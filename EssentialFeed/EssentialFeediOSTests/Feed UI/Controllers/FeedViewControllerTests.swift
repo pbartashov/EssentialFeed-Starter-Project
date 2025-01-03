@@ -461,6 +461,7 @@ private extension UITableViewController {
         }
 
         refreshControl = fake
+        (self as? FeedViewController)?.refreshViewController?.view = fake
     }
 }
 
