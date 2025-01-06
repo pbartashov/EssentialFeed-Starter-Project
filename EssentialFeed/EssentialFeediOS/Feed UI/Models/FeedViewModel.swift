@@ -1,5 +1,5 @@
 //
-//  FeedRefreshViewModel.swift
+//  FeedViewModel.swift
 //  EssentialFeed
 //
 //  Created by Pavel Bartashov on 6/1/2025.
@@ -9,7 +9,7 @@
 import UIKit
 import EssentialFeed
 
-public final class FeedRefreshViewModel {
+final class FeedViewModel {
     typealias Obsever<T> = (T) -> Void
 
     private let feedLoader: FeedLoader
