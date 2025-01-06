@@ -10,25 +10,23 @@ import UIKit
 import EssentialFeed
 
 public final class FeedRefreshViewModel {
-    private let feedLoader: FeedLoader
-    var onChange: ((FeedRefreshViewModel) -> Void)?
-    var onFeedLoad: (([FeedImage]) -> Void)?
+    typealias Obsever<T> = (T) -> Void
 
-    var isLoading = false {
-        didSet { onChange?(self) }
-    }
+    private let feedLoader: FeedLoader
+    var onLoadingStateChange: Obsever<Bool>?
+    var onFeedLoad: Obsever<[FeedImage]>?
 
     init(feedLoader: FeedLoader) {
         self.feedLoader = feedLoader
     }
 
     func loadFeed() {
-        isLoading = true
+        onLoadingStateChange?(true)
         feedLoader.load { [weak self] result in
             if let feed = try? result.get() {
                 self?.onFeedLoad?(feed)
             }
-            self?.isLoading = false
+            self?.onLoadingStateChange?(false)
         }
     }
 }
