@@ -15,10 +15,11 @@ public final class FeedUIComposer {
         feedLoader: FeedLoader,
         imageLoader: FeedImageDataLoader
     ) -> FeedViewController {
-        let viewModel = FeedViewModel(feedLoader: feedLoader)
-        let refreshViewController = FeedRefreshViewController(viewModel: viewModel)
+        let presenter = FeedPresenter(feedLoader: feedLoader)
+        let refreshViewController = FeedRefreshViewController(presenter: presenter)
         let feedController = FeedViewController(refreshController: refreshViewController)
-        viewModel.onFeedLoad = adaptFeedToCelControllers(forewardingTo: feedController, loader: imageLoader)
+        presenter.feedLoadingView = refreshViewController
+        presenter.feedView = FeedViewAdapter(controller: feedController, loader: imageLoader)
 
         return feedController
     }
@@ -32,6 +33,23 @@ public final class FeedUIComposer {
                 let viewModel = FeedImageViewModel(model: model, imageLoader: loader, imageTransformer: UIImage.init)
                 return FeedImageCellController(viewModel: viewModel)
             }
+        }
+    }
+}
+
+final class FeedViewAdapter: FeedView {
+    private weak var controller: FeedViewController?
+    private let loader: FeedImageDataLoader
+
+    init(controller: FeedViewController, loader: FeedImageDataLoader) {
+        self.controller = controller
+        self.loader = loader
+    }
+
+    func display(feed: [FeedImage]) {
+        controller?.tableModel = feed.map { model in
+            let viewModel = FeedImageViewModel(model: model, imageLoader: loader, imageTransformer: UIImage.init)
+            return FeedImageCellController(viewModel: viewModel)
         }
     }
 }

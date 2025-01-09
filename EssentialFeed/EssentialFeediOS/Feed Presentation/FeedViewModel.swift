@@ -5,7 +5,6 @@
 //  Created by Pavel Bartashov on 6/1/2025.
 //
 
-
 import UIKit
 import EssentialFeed
 
