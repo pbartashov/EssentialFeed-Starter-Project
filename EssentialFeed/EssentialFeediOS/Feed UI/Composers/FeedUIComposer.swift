@@ -15,12 +15,14 @@ public final class FeedUIComposer {
         feedLoader: FeedLoader,
         imageLoader: FeedImageDataLoader
     ) -> FeedViewController {
-        let presenter = FeedPresenter()
-        let presentaionAdapter = FeedLoaderPresentationAdapter(loader: feedLoader, presenter: presenter)
+        let presentaionAdapter = FeedLoaderPresentationAdapter(loader: feedLoader)
         let refreshViewController = FeedRefreshViewController(delegate: presentaionAdapter)
         let feedController = FeedViewController(refreshController: refreshViewController)
-        presenter.feedLoadingView = WeakRefVirtualProxy(refreshViewController)
-        presenter.feedView = FeedViewAdapter(controller: feedController, loader: imageLoader)
+        let presenter = FeedPresenter(
+            feedLoadingView: WeakRefVirtualProxy(refreshViewController),
+            feedView: FeedViewAdapter(controller: feedController, loader: imageLoader)
+        )
+        presentaionAdapter.presenter = presenter
 
         return feedController
     }
@@ -54,22 +56,21 @@ extension WeakRefVirtualProxy: FeedLoadingView where T: FeedLoadingView {
 
 final class FeedLoaderPresentationAdapter: FeedRefreshViewControllerDelegate {
     private let loader: FeedLoader
-    private let presenter: FeedPresenter
+    var presenter: FeedPresenter?
 
-    init(loader: FeedLoader, presenter: FeedPresenter) {
+    init(loader: FeedLoader) {
         self.loader = loader
-        self.presenter = presenter
     }
 
     func didRequestFeedRefresh() {
-        presenter.didStartLoadingFeed()
+        presenter?.didStartLoadingFeed()
 
         loader.load { [weak self] result in
             switch result {
                 case let .success(feed):
-                    self?.presenter.didFinishLoadingFeed(with: feed)
+                    self?.presenter?.didFinishLoadingFeed(with: feed)
                 case let .failure(error):
-                    self?.presenter.didFailLoadingFeed(with: error)
+                    self?.presenter?.didFailLoadingFeed(with: error)
             }
         }
     }
