@@ -23,7 +23,11 @@ protocol FeedView {
     func display(_ viewModel: FeedViewModel)
 }
 
-final class FeedPresenter {
+protocol FeedPresenterInput {
+    func loadFeed()
+}
+
+final class FeedPresenter: FeedPresenterInput {
     private let feedLoader: FeedLoader
     var feedLoadingView: FeedLoadingView?
     var feedView: FeedView?

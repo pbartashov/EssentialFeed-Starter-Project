@@ -16,7 +16,7 @@ public final class FeedUIComposer {
         imageLoader: FeedImageDataLoader
     ) -> FeedViewController {
         let presenter = FeedPresenter(feedLoader: feedLoader)
-        let refreshViewController = FeedRefreshViewController(loadFeed: presenter.loadFeed)
+        let refreshViewController = FeedRefreshViewController(presenter: presenter)
         let feedController = FeedViewController(refreshController: refreshViewController)
         presenter.feedLoadingView = WeakRefVirtualProxy(refreshViewController)
         presenter.feedView = FeedViewAdapter(controller: feedController, loader: imageLoader)
