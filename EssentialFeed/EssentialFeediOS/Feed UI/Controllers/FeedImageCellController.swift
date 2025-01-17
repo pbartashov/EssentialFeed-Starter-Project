@@ -36,7 +36,8 @@ final class FeedImageCellController: FeedImageView {
         return cell!
     }
 
-    func loadImage() {
+    func loadImage(for cell: UITableViewCell) {
+        self.cell = cell as? FeedImageCell
         delegate.didRequestImage()
     }
 
@@ -59,6 +60,7 @@ final class FeedImageCellController: FeedImageView {
     }
 
     private func releaseCellForReuse() {
+        cell?.onReuse = nil
         cell = nil
     }
 }
