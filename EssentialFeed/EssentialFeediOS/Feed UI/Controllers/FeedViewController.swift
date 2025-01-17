@@ -22,6 +22,12 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
 
     private var cellControllers = [IndexPath: FeedImageCellController]()
 
+    @available(iOS 13, *)
+    convenience init?(coder: NSCoder, delegate: FeedViewControllerDelegate) {
+        self.init(coder: coder)
+        self.delegate = delegate
+    }
+
     func display(_ viewModel: FeedLoadingViewModel) {
         if viewModel.isLoading {
             refreshControl?.beginRefreshing()

@@ -16,11 +16,20 @@ public final class FeedUIComposer {
         imageLoader: FeedImageDataLoader
     ) -> FeedViewController {
         let presentationAdapter = FeedLoaderPresentationAdapter(loader: feedLoader)
-
         let bundle = Bundle(for: FeedViewController.self)
-        let storyBoard = UIStoryboard(name: "Feed", bundle: bundle)
-        let feedController = storyBoard.instantiateInitialViewController() as! FeedViewController
-        feedController.delegate = presentationAdapter
+        let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
+        var feedController: FeedViewController
+
+        if #available(iOS 13.0, *) {
+            feedController = storyboard.instantiateInitialViewController { coder in
+                // Initializer Injection on iOS13+
+                FeedViewController(coder: coder, delegate: presentationAdapter)
+            }!
+        } else {
+            // Property Injection on older iOS versions
+            feedController = storyboard.instantiateInitialViewController() as! FeedViewController
+            feedController.delegate = presentationAdapter
+        }
 
         presentationAdapter.presenter = FeedPresenter(
             feedView: FeedViewAdapter(controller: feedController, imageLoader: imageLoader),
