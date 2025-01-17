@@ -238,6 +238,17 @@ final class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(loader.loadedImageURLs, [image0.url, image1.url], "Expected second cancelled image url request once second image is not near visible anymore")
     }
 
+    func test_feedImageView_doesNotRenderLoadedImageWhenNNotVisibleAnyMore() {
+        let (sut, loader) = makeSUT()
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [makeImage()])
+
+        let view = sut.simulateFeedImageViewNotVisible(at: 0)
+        loader.completeImageLoading(with: anyImageData())
+
+        XCTAssertNil(view?.renderedImage, "Expected no rendered image when an image load finishes after the view is not visible anymore")
+    }
+
     // MARK: - Helpers
 
     private func makeSUT(
@@ -259,6 +270,10 @@ final class FeedViewControllerTests: XCTestCase {
         url: URL = URL(string: "http://any-url.com")!
     ) -> FeedImage {
         FeedImage(id: UUID(), description: description, location: location, url: url)
+    }
+
+    private func anyImageData() -> Data {
+        return UIImage.make(withColor: .red).pngData()!
     }
 
     private func assertThat(
@@ -426,13 +441,16 @@ private extension UITableViewController {
         return feedImageView(at: row) as? FeedImageCell
     }
 
-    func simulateFeedImageViewNotVisible(at row: Int) {
+    @discardableResult
+    func simulateFeedImageViewNotVisible(at row: Int) -> FeedImageCell? {
         let view = simulateFeedImageViewVisible(at: row)
 
         let delegate = tableView.delegate
         let indexPath = IndexPath(row: row, section: feedImageSection)
 
         delegate?.tableView?(tableView, didEndDisplaying: view!, forRowAt: indexPath)
+
+        return view
     }
 
     func simulateImageViewNearVisible(at row: Int) {
@@ -504,5 +522,11 @@ private extension UIImage {
             color.setFill()
             rendererContext.fill(rect)
         }
+    }
+}
+
+extension FeedImageCell {
+    var renderedImage: UIImage? {
+        feedImageView.image
     }
 }
