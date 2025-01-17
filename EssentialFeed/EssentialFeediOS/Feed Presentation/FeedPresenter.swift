@@ -19,7 +19,7 @@ final class FeedPresenter {
     private let feedLoadingView: FeedLoadingView
     private let feedView: FeedView
 
-    init(feedLoadingView: FeedLoadingView, feedView: FeedView) {
+    init(feedView: FeedView, feedLoadingView: FeedLoadingView) {
         self.feedLoadingView = feedLoadingView
         self.feedView = feedView
     }
