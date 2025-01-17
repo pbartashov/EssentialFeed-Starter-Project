@@ -25,6 +25,7 @@ final class FeedImageCellController: FeedImageView {
 
         return cell
     }
+
     func loadImage() {
         delegate.didRequestImage()
     }
