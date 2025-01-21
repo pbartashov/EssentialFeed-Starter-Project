@@ -36,6 +36,8 @@ public final class FeedUIComposer {
             feedLoadingView: WeakRefVirtualProxy(feedController)
         )
 
+        feedController.title = FeedPresenter.title
+
         return feedController
     }
 }
