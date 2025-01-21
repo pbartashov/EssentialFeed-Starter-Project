@@ -9,7 +9,7 @@ import UIKit
 import EssentialFeed
 import EssentialFeediOS
 
-extension FeedViewControllerTests {
+extension FeedUIIntegrationTests {
     func makeSUT(
         file: StaticString = #filePath,
         line: UInt = #line
