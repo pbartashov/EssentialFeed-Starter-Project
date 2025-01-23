@@ -230,7 +230,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         XCTAssertEqual(loader.loadedImageURLs, [image0.url, image1.url], "Expected second image url request once second image is near visible")
     }
 
-    func test_feedImageView_preloadsImageULRWhenNearNotVisible() {
+    func test_feedImageView_cancelsImageURLPreloadWhenNearNotVisible() {
         let image0 = makeImage(url: URL(string: "http://url-0.com")!)
         let image1 = makeImage(url: URL(string: "http://url-1.com")!)
         let (sut, loader) = makeSUT()
@@ -240,13 +240,13 @@ final class FeedUIIntegrationTests: XCTestCase {
         XCTAssertEqual(loader.cancelledImageURLs, [], "Expected no cancelled image url requests until image is not near visible")
 
         sut.simulateImageViewNearNotVisible(at: 0)
-        XCTAssertEqual(loader.loadedImageURLs, [image0.url], "Expected first cancelled image url request once first image is not near visible anymore")
+        XCTAssertEqual(loader.cancelledImageURLs, [image0.url], "Expected first cancelled image url request once first image is not near visible anymore")
 
         sut.simulateImageViewNearNotVisible(at: 1)
-        XCTAssertEqual(loader.loadedImageURLs, [image0.url, image1.url], "Expected second cancelled image url request once second image is not near visible anymore")
+        XCTAssertEqual(loader.cancelledImageURLs, [image0.url, image1.url], "Expected second cancelled image url request once second image is not near visible anymore")
     }
 
-    func test_feedImageView_doesNotRenderLoadedImageWhenNNotVisibleAnyMore() {
+    func test_feedImageView_doesNotRenderLoadedImageWhenNotVisibleAnyMore() {
         let (sut, loader) = makeSUT()
         sut.simulateAppearance()
         loader.completeFeedLoading(with: [makeImage()])
@@ -295,6 +295,20 @@ final class FeedUIIntegrationTests: XCTestCase {
         let exp = expectation(description: "Waiting for background queue")
         DispatchQueue.global().async {
             loader.completeFeedLoading(at: 0)
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
+
+    func test_loadImageDataCompletion_dispatchesFromBackgroundToMainThread() {
+        let (sut, loader) = makeSUT()
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [makeImage()])
+        sut.simulateFeedImageViewVisible(at: 0)
+
+        let exp = expectation(description: "Waiting for background queue")
+        DispatchQueue.global().async {
+            loader.completeImageLoading(with: self.anyImageData(), at: 0)
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)
