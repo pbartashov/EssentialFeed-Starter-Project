@@ -288,7 +288,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         XCTAssertEqual(newView.renderedImageData, imageData)
     }
 
-    func test_loadFeedCompetion_dispatchesFromBackgroundToMainTHread() {
+    func test_loadFeedCompletion_dispatchesFromBackgroundToMainThread() {
         let (sut, loader) = makeSUT()
         sut.simulateAppearance()
 
