@@ -8,7 +8,7 @@
 import UIKit
 import EssentialFeediOS
 
-extension UITableViewController {
+extension FeedViewController {
     var isShowingLoadingIndicator: Bool {
         refreshControl?.isRefreshing == true
     }
@@ -71,6 +71,14 @@ extension UITableViewController {
         let index = IndexPath(row: row, section: feedImageSection)
 
         ds?.tableView?(tableView, cancelPrefetchingForRowsAt: [index])
+    }
+
+    func simulateTapOnErrorMessage() {
+        errorView?.button.simulateTap()
+    }
+
+    var errorMessage: String? {
+        errorView?.message
     }
 
     func replaceRefreshControlWithFakeForiOS17Support() {

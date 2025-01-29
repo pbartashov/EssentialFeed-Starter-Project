@@ -11,7 +11,8 @@ protocol FeedViewControllerDelegate {
     func didRequestFeedRefresh()
 }
 
-public final class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching, FeedLoadingView {
+public final class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching {
+    @IBOutlet private(set) public var errorView: ErrorView?
     private var onViewIsAppearing: ((FeedViewController) -> Void)?
 
     var delegate: FeedViewControllerDelegate?
@@ -26,14 +27,6 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
     convenience init?(coder: NSCoder, delegate: FeedViewControllerDelegate) {
         self.init(coder: coder)
         self.delegate = delegate
-    }
-
-    func display(_ viewModel: FeedLoadingViewModel) {
-        if viewModel.isLoading {
-            refreshControl?.beginRefreshing()
-        } else {
-            refreshControl?.endRefreshing()
-        }
     }
 
     @IBAction private func refresh() {
@@ -87,5 +80,25 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
 
     private func cancelCellControlerLoad(forRowAt indexPath: IndexPath) {
         cellController(forRowAt: indexPath).cancelLoad()
+    }
+}
+
+extension FeedViewController: FeedLoadingView {
+    func display(_ viewModel: FeedLoadingViewModel) {
+        if viewModel.isLoading {
+            refreshControl?.beginRefreshing()
+        } else {
+            refreshControl?.endRefreshing()
+        }
+    }
+}
+
+extension FeedViewController: FeedErrorView {
+    func display(_ viewModel: FeedErrorViewModel) {
+        if let message = viewModel.message {
+            errorView?.show(message: message)
+        } else {
+            errorView?.hideMessage()
+        }
     }
 }
