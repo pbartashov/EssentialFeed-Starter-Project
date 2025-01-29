@@ -12,7 +12,7 @@ struct FeedErrorViewModel {
         return FeedErrorViewModel(message: message)
     }
 
-    static func none() -> Self {
+    static func noError() -> Self {
         return FeedErrorViewModel(message: nil)
     }
 }
