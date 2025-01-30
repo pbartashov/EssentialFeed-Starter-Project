@@ -5,8 +5,8 @@
 //  Created by Pavel Bartashov on 3/1/2025.
 //
 
-import EssentialFeed
 import UIKit
+import EssentialFeed
 
 public final class FeedUIComposer {
     private init() { }
@@ -16,7 +16,7 @@ public final class FeedUIComposer {
         imageLoader: FeedImageDataLoader
     ) -> FeedViewController {
         let presentationAdapter = FeedLoaderPresentationAdapter(loader: MainQueueDispatchDecorator(decoratee: feedLoader))
-        let feedController = makeFeedViewController(delegate: presentationAdapter, title: Localized.Feed.title)
+        let feedController = makeFeedViewController(delegate: presentationAdapter, title: FeedPresenter.title)
 
         presentationAdapter.presenter = FeedPresenter(
             feedView: FeedViewAdapter(controller: feedController, imageLoader: MainQueueDispatchDecorator(decoratee: imageLoader)),
