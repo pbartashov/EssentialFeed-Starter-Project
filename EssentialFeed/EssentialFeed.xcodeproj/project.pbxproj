@@ -163,6 +163,7 @@
 		718A345F2D4A4E23009F599E /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				FeedImagePresenterTests.swift,
 				FeedLocalizationTests.swift,
 				FeedPresenterTests.swift,
 			);
