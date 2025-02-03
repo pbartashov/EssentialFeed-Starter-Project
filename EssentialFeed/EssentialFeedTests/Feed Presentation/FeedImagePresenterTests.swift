@@ -28,9 +28,11 @@ protocol FeedImageView {
 
 final class FeedImagePresenter<View: FeedImageView> {
     private let view: View
+    private let imageTransformer: (Data) -> Any?
 
-    init(view: View) {
+    init(view: View, imageTransformer: @escaping (Data) -> Any?) {
         self.view = view
+        self.imageTransformer = imageTransformer
     }
 
     func didStartLoadingImageData(for model: FeedImage) {
@@ -40,6 +42,16 @@ final class FeedImagePresenter<View: FeedImageView> {
             image: nil,
             isLoading: true,
             shouldRetry: false
+        ))
+    }
+
+    func didFinishLoadingImageData(with data: Data, for model: FeedImage) {
+        view.display(FeedImageViewModel(
+            description: model.description,
+            location: model.location,
+            image: imageTransformer(data),
+            isLoading: false,
+            shouldRetry: true
         ))
     }
 }
@@ -68,14 +80,32 @@ final class FeedImagePresenterTests: XCTestCase {
         XCTAssertNil(message?.image)
     }
 
+    func test_didFinishLoadingImageData_displaysRetryOnFailedImageTransformation() {
+        let (sut, view) = makeSUT(imageTransformer: { _ in nil })
+        let image = uniqueImage()
+        let data = Data()
+
+        sut.didFinishLoadingImageData(with: data, for: image)
+
+        let message = view.messages.first
+        XCTAssertEqual(view.messages.count, 1)
+        XCTAssertEqual(message?.description, image.description)
+        XCTAssertEqual(message?.location, image.location)
+        XCTAssertEqual(message?.isLoading, false)
+        XCTAssertEqual(message?.shouldRetry, true)
+        XCTAssertNil(message?.image)
+
+    }
+
     // MARK: - Helpers
 
     private func makeSUT(
+        imageTransformer: @escaping (Data) -> Any? = { _ in nil },
         file: StaticString = #filePath,
         line: UInt = #line
     ) -> (sut: FeedImagePresenter<ViewSpy>, view: ViewSpy) {
         let view = ViewSpy()
-        let sut = FeedImagePresenter(view: view)
+        let sut = FeedImagePresenter(view: view, imageTransformer: imageTransformer)
 
         trackForMemoryLeaks(view, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
