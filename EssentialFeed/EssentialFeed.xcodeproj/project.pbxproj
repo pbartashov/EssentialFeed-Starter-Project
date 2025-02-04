@@ -172,6 +172,7 @@
 				FeedImagePresenterTests.swift,
 				FeedLocalizationTests.swift,
 				FeedPresenterTests.swift,
+				RemoteFeedImageDataLoaderTests.swift,
 			);
 			target = 080EDEF921B6DA7E00813479 /* EssentialFeedTests */;
 		};
