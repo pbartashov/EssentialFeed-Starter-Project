@@ -186,6 +186,7 @@
 		710D1A3E2D1EDEB600E3270B /* EssentialFeediOS */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = EssentialFeediOS; sourceTree = "<group>"; };
 		710D1A482D1EDEB600E3270B /* EssentialFeediOSTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = EssentialFeediOSTests; sourceTree = "<group>"; };
 		711AABFC2D5339990033F664 /* Helpers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Helpers; sourceTree = "<group>"; };
+		711AAC012D5344C90033F664 /* Helpers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Helpers; sourceTree = "<group>"; };
 		7152A1102CE8BEAC006E34D4 /* EssentialFeedAPIEndToEndTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = EssentialFeedAPIEndToEndTests; sourceTree = "<group>"; };
 		718A345B2D4A4DF4009F599E /* Feed Presentation */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (718A345F2D4A4E23009F599E /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Feed Presentation"; sourceTree = "<group>"; };
 		71F01F642D0D564F00DD73E7 /* EssentialFeedCacheIntegrationTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = EssentialFeedCacheIntegrationTests; sourceTree = "<group>"; };
@@ -371,6 +372,7 @@
 				711AABFD2D533A7A0033F664 /* RemoteFeedImageDataLoader.swift */,
 				7152A0FC2CD8E9FA006E34D4 /* RemoteFeedLoader.swift */,
 				7152A1002CDF7C96006E34D4 /* FeedItemsMapper.swift */,
+				711AAC012D5344C90033F664 /* Helpers */,
 				7142AA3F2CF8A69E0055E97E /* RemoteFeedItem.swift */,
 				7152A1082CE77BFA006E34D4 /* URLSessionHTTPClient.swift */,
 				7152A0FE2CDF7AE7006E34D4 /* HTTPClient.swift */,
@@ -457,6 +459,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				711AAC012D5344C90033F664 /* Helpers */,
 			);
 			name = EssentialFeed;
 			productName = EssentialFeed;
