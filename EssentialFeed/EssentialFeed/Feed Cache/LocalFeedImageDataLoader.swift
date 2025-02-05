@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class LocalFeedImageDataLoader {
+public final class LocalFeedImageDataLoader: FeedImageDataLoader {
     private final class Task: FeedImageDataLoaderTask {
         private var completion: ((FeedImageDataLoader.Result) -> Void)?
 
@@ -33,6 +33,8 @@ public final class LocalFeedImageDataLoader {
         case notFound
     }
 
+    public typealias SaveResult = Result<Void, Swift.Error>
+
     private let store: FeedImageDataStore
 
     public init(store: FeedImageDataStore) {
@@ -55,5 +57,9 @@ public final class LocalFeedImageDataLoader {
         }
 
         return task
+    }
+
+    public func save(_ data: Data, for url: URL, completion: @escaping (SaveResult) -> Void) {
+        store.insert(data, for: url) { _ in }
     }
 }
