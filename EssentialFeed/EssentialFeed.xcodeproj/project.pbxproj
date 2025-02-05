@@ -19,6 +19,8 @@
 		711AAC562D534A980033F664 /* LoadFeedImageDataFromCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711AAC552D534A980033F664 /* LoadFeedImageDataFromCacheUseCaseTests.swift */; };
 		711AAC582D5355630033F664 /* FeedImageDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711AAC572D5355630033F664 /* FeedImageDataStore.swift */; };
 		711AAC5B2D5355A10033F664 /* LocalFeedImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711AAC592D53558F0033F664 /* LocalFeedImageDataLoader.swift */; };
+		711AAC5D2D535B010033F664 /* FeedImageDataStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711AAC5C2D535B010033F664 /* FeedImageDataStoreSpy.swift */; };
+		711AAC5E2D535B010033F664 /* FeedImageDataStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711AAC5C2D535B010033F664 /* FeedImageDataStoreSpy.swift */; };
 		712A2A142D217FCF005887FC /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080EDEF121B6DA7E00813479 /* EssentialFeed.framework */; };
 		712A2A152D217FCF005887FC /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 080EDEF121B6DA7E00813479 /* EssentialFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		712A2A192D2180FE005887FC /* XCTTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152A1062CE6223F006E34D4 /* XCTTestCase+MemoryLeakTracking.swift */; };
@@ -135,6 +137,7 @@
 		711AAC552D534A980033F664 /* LoadFeedImageDataFromCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFeedImageDataFromCacheUseCaseTests.swift; sourceTree = "<group>"; };
 		711AAC572D5355630033F664 /* FeedImageDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataStore.swift; sourceTree = "<group>"; };
 		711AAC592D53558F0033F664 /* LocalFeedImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeedImageDataLoader.swift; sourceTree = "<group>"; };
+		711AAC5C2D535B010033F664 /* FeedImageDataStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataStoreSpy.swift; sourceTree = "<group>"; };
 		7130ADFD2D2FE925001FD726 /* CoreDataFeedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFeedStore.swift; sourceTree = "<group>"; };
 		7130ADFE2D2FE925001FD726 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
 		7130AE002D2FE925001FD726 /* ManagedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedCache.swift; sourceTree = "<group>"; };
@@ -359,6 +362,7 @@
 		7142AA452CF9EB1B0055E97E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				711AAC5C2D535B010033F664 /* FeedImageDataStoreSpy.swift */,
 				711AAC022D5346490033F664 /* URLProtocolStub.swift */,
 				7142AA462CF9EB530055E97E /* FeedCacheSpy.swift */,
 				7142AA4C2CFF38910055E97E /* FeedCacheTestHelpers.swift */,
@@ -753,6 +757,7 @@
 				711AAC562D534A980033F664 /* LoadFeedImageDataFromCacheUseCaseTests.swift in Sources */,
 				7152A0F82CD8A734006E34D4 /* LoadFeedFromRemoteUseCaseTests.swift in Sources */,
 				71CF23472CF49D010013DF22 /* CacheFeedUseCaseTests.swift in Sources */,
+				711AAC5D2D535B010033F664 /* FeedImageDataStoreSpy.swift in Sources */,
 				7142AA442CF9EA310055E97E /* LoadFeedFromCacheUseCaseTests.swift in Sources */,
 				7142AA582D0727EE0055E97E /* FeedStoreSpecs.swift in Sources */,
 				7152A1042CE21E68006E34D4 /* URLSessionHTTPClientTests.swift in Sources */,
@@ -792,6 +797,7 @@
 				71F01F722D0DA9EE00DD73E7 /* SharedTestHelpers.swift in Sources */,
 				71F01F702D0D8E2A00DD73E7 /* XCTTestCase+MemoryLeakTracking.swift in Sources */,
 				71F01F712D0DA9D000DD73E7 /* FeedCacheTestHelpers.swift in Sources */,
+				711AAC5E2D535B010033F664 /* FeedImageDataStoreSpy.swift in Sources */,
 				711AAC032D5346490033F664 /* URLProtocolStub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
