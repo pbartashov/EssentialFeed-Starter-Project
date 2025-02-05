@@ -140,7 +140,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         var completedOperationsInOrder = [XCTestExpectation]()
 
         let op1 = expectation(description: "Operation 1")
-        sut.insert(uniqueImageFeed().local, timesStamp: Date()) { _ in
+        sut.insert(uniqueImageFeed().local, timestamp: Date()) { _ in
             completedOperationsInOrder.append(op1)
             op1.fulfill()
         }
@@ -169,7 +169,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
     ) -> Error? {
         let exp = expectation(description: "Wait for cache insertion")
         var insertionError: Error?
-        sut.insert(cache.feed, timesStamp: cache.timestamp) { receivedInsertionResult in
+        sut.insert(cache.feed, timestamp: cache.timestamp) { receivedInsertionResult in
             if case let .failure(error) = receivedInsertionResult {
                   insertionError = error
             }
