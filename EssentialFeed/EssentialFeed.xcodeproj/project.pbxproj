@@ -335,6 +335,7 @@
 		7130AE022D2FE925001FD726 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				711AAC642D5370910033F664 /* CoreDataFeedStore+FeedImageDataLoader.swift */,
 				7130ADFD2D2FE925001FD726 /* CoreDataFeedStore.swift */,
 				7130ADFE2D2FE925001FD726 /* CoreDataHelpers.swift */,
 				7130ADFF2D2FE925001FD726 /* FeedStore.xcdatamodeld */,
@@ -347,7 +348,6 @@
 		7130AE032D2FE925001FD726 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
-				711AAC642D5370910033F664 /* CoreDataFeedStore+FeedImageDataLoader.swift */,
 				7130AE022D2FE925001FD726 /* CoreData */,
 			);
 			path = Infrastructure;
