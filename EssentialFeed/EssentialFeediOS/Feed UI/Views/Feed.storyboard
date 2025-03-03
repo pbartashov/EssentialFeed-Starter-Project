@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="9BX-kC-Ymq" customClass="ErrorView" customModule="MVP" customModuleProvider="target">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="9BX-kC-Ymq" customClass="ErrorView" customModule="EssentialFeediOS" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -93,6 +93,7 @@ Location</string>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uR1-33-OLd">
                                                             <rect key="frame" x="0.0" y="0.0" width="353" height="353"/>
+                                                            <accessibility key="accessibilityConfiguration" identifier="feed-image-view"/>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Xs-FQ-RoV">
                                                             <rect key="frame" x="0.0" y="0.0" width="353" height="353"/>
@@ -147,6 +148,7 @@ Location</string>
                                         <constraint firstItem="4pa-6d-fr6" firstAttribute="bottom" secondItem="ADW-J9-hWc" secondAttribute="bottomMargin" priority="999" constant="6" id="g2E-4P-rAQ"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration" identifier="feed-image-cell"/>
                                 <connections>
                                     <outlet property="descriptionLabel" destination="T0I-O8-vpF" id="5Fq-Mk-PnZ"/>
                                     <outlet property="feedImageContainer" destination="ASu-zN-MCN" id="6fn-dA-EMH"/>
