@@ -11,7 +11,6 @@
 		7190748B2D56318100B12452 /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 719074892D56318100B12452 /* EssentialFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7190748E2D56318400B12452 /* EssentialFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7190748D2D56318400B12452 /* EssentialFeediOS.framework */; };
 		7190748F2D56318400B12452 /* EssentialFeediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7190748D2D56318400B12452 /* EssentialFeediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		71B145B42D75CAD300614046 /* EssentialAppUIAcceptanceTests.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 71B145B22D75CAD300614046 /* EssentialAppUIAcceptanceTests.xctestplan */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +51,6 @@
 		7190748D2D56318400B12452 /* EssentialFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EssentialFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		719074942D56DFD200B12452 /* EssentialAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71B145A42D75C9A900614046 /* EssentialAppUIAcceptanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialAppUIAcceptanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		71B145B22D75CAD300614046 /* EssentialAppUIAcceptanceTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = EssentialAppUIAcceptanceTests.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -147,7 +145,6 @@
 		71B145B32D75CAD300614046 /* Targets */ = {
 			isa = PBXGroup;
 			children = (
-				71B145B22D75CAD300614046 /* EssentialAppUIAcceptanceTests.xctestplan */,
 			);
 			path = Targets;
 			sourceTree = "<group>";
@@ -274,7 +271,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71B145B42D75CAD300614046 /* EssentialAppUIAcceptanceTests.xctestplan in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
