@@ -119,7 +119,6 @@
 				71B145A52D75C9A900614046 /* EssentialAppUIAcceptanceTests */,
 				719074882D56318000B12452 /* Frameworks */,
 				719074132D56302400B12452 /* Products */,
-				71B145B32D75CAD300614046 /* Targets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -140,13 +139,6 @@
 				719074892D56318100B12452 /* EssentialFeed.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		71B145B32D75CAD300614046 /* Targets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Targets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
