@@ -65,13 +65,6 @@
         "identifier" : "71F01F622D0D564F00DD73E7",
         "name" : "EssentialFeedCacheIntegrationTests"
       }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:EssentialApp\/EssentialApp.xcodeproj",
-        "identifier" : "71B145A32D75C9A900614046",
-        "name" : "EssentialAppUIAcceptanceTests"
-      }
     }
   ],
   "version" : 1
