@@ -1,5 +1,5 @@
 //
-//  File 2.swift
+//  FeedUIIntegrationTests+Helpers.swift
 //  EssentialFeed
 //
 //  Created by Pavel Bartashov on 21/1/2025.

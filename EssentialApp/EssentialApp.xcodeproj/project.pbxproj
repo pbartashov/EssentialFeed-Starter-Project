@@ -9,8 +9,10 @@
 /* Begin PBXBuildFile section */
 		7190748A2D56318100B12452 /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 719074892D56318100B12452 /* EssentialFeed.framework */; };
 		7190748B2D56318100B12452 /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 719074892D56318100B12452 /* EssentialFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7190748E2D56318400B12452 /* EssentialFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7190748D2D56318400B12452 /* EssentialFeediOS.framework */; };
-		7190748F2D56318400B12452 /* EssentialFeediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7190748D2D56318400B12452 /* EssentialFeediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		71FBDE882D7EFD5100B3B765 /* EssentialFeedAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FBDE872D7EFD5100B3B765 /* EssentialFeedAPI.framework */; };
+		71FBDE892D7EFD5100B3B765 /* EssentialFeedAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 71FBDE872D7EFD5100B3B765 /* EssentialFeedAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		71FBDE8A2D7EFD6100B3B765 /* EssentialFeedAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FBDE872D7EFD5100B3B765 /* EssentialFeedAPI.framework */; };
+		71FBDE8B2D7EFD6E00B3B765 /* EssentialFeedAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FBDE872D7EFD5100B3B765 /* EssentialFeedAPI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,8 +32,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				71FBDE892D7EFD5100B3B765 /* EssentialFeedAPI.framework in Embed Frameworks */,
 				7190748B2D56318100B12452 /* EssentialFeed.framework in Embed Frameworks */,
-				7190748F2D56318400B12452 /* EssentialFeediOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,6 +45,8 @@
 		719074892D56318100B12452 /* EssentialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EssentialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7190748D2D56318400B12452 /* EssentialFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EssentialFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		719074942D56DFD200B12452 /* EssentialAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		71FBDE842D7EFD4B00B3B765 /* EssentialFeedAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = EssentialFeedAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		71FBDE872D7EFD5100B3B765 /* EssentialFeedAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EssentialFeedAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -76,8 +80,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71FBDE8B2D7EFD6E00B3B765 /* EssentialFeedAPI.framework in Frameworks */,
+				71FBDE8A2D7EFD6100B3B765 /* EssentialFeedAPI.framework in Frameworks */,
+				71FBDE882D7EFD5100B3B765 /* EssentialFeedAPI.framework in Frameworks */,
 				7190748A2D56318100B12452 /* EssentialFeed.framework in Frameworks */,
-				7190748E2D56318400B12452 /* EssentialFeediOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +119,8 @@
 		719074882D56318000B12452 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				71FBDE872D7EFD5100B3B765 /* EssentialFeedAPI.framework */,
+				71FBDE842D7EFD4B00B3B765 /* EssentialFeedAPITests.xctest */,
 				7190748D2D56318400B12452 /* EssentialFeediOS.framework */,
 				719074892D56318100B12452 /* EssentialFeed.framework */,
 			);
