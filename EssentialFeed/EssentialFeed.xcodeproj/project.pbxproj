@@ -279,6 +279,7 @@
 				7152A1102CE8BEAC006E34D4 /* EssentialFeedAPIEndToEndTests */,
 				71F01F642D0D564F00DD73E7 /* EssentialFeedCacheIntegrationTests */,
 				710D1A482D1EDEB600E3270B /* EssentialFeediOSTests */,
+				710421B72D7E7058001F0DF8 /* Helpers */,
 				712A2A0E2D217EC1005887FC /* Frameworks */,
 				080EDEF221B6DA7E00813479 /* Products */,
 			);
@@ -331,6 +332,13 @@
 				711AABAD2D522D230033F664 /* FeedImageDataLoader.swift */,
 			);
 			path = "Feed Feature";
+			sourceTree = "<group>";
+		};
+		710421B72D7E7058001F0DF8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		712A2A0E2D217EC1005887FC /* Frameworks */ = {
