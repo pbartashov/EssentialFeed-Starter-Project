@@ -16,9 +16,8 @@ extension FeedUIIntegrationTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
-        sut.tableView.layoutIfNeeded()
-        RunLoop.main.run(until: Date())
-
+        sut.view.enforceLayoutCycle()
+        
         guard sut.numberOfRenderedImageViews == feed.count else {
             return XCTFail("Expected \(feed.count) images, got \(sut.numberOfRenderedImageViews) instead", file: file, line: line)
         }
