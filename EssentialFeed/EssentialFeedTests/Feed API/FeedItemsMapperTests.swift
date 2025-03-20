@@ -1,5 +1,5 @@
 //
-//  LoadFeedFromRemoteUseCaseTests.swift
+//  FeedItemsMapperTests.swift
 //  EssentialFeedTests
 //
 //  Created by Pavel Bartashov on 4/11/2024.
@@ -58,10 +58,6 @@ final class FeedItemsMapperTests: XCTestCase {
 
     // MARK: - Helpers
 
-    private func failure(_ error: RemoteFeedLoader.Error) ->RemoteFeedLoader.Result {
-        .failure(error)
-    }
-
     private func makeItem(id: UUID, description: String? = nil, location: String? = nil, imageURL: URL) -> (model: FeedImage, json: [String: Any]) {
         let item = FeedImage(id: id, description: description, location: location, url: imageURL)
 
@@ -73,17 +69,5 @@ final class FeedItemsMapperTests: XCTestCase {
         ].compactMapValues { $0 }
 
         return (item, json)
-    }
-
-    private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
-        let items = ["items": items]
-        return try! JSONSerialization.data(withJSONObject: items)
-    }
-
-}
-
-private extension HTTPURLResponse {
-    convenience init(statusCode: Int) {
-        self.init(url: anyURL(), statusCode: statusCode, httpVersion: nil, headerFields: nil)!
     }
 }
