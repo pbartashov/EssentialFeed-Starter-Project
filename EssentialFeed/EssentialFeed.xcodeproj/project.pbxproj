@@ -279,6 +279,13 @@
 			);
 			target = 71F01F622D0D564F00DD73E7 /* EssentialFeedCacheIntegrationTests */;
 		};
+		71FBE1772D8C0F9900B3B765 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				LoadImageCommentsFromRemoteUseCaseTests.swift,
+			);
+			target = 710421E52D7EBBF2001F0DF8 /* EssentialFeedAPITests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -293,6 +300,8 @@
 		71FBE1662D8C0BA200B3B765 /* Image Comments Feature */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Image Comments Feature"; sourceTree = "<group>"; };
 		71FBE16E2D8C0E1000B3B765 /* Shared API infra */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (71FBE1722D8C0E9500B3B765 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 71FBE1732D8C0E9500B3B765 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 71FBE1712D8C0E7D00B3B765 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Shared API infra"; sourceTree = "<group>"; };
 		71FBE16F2D8C0E4D00B3B765 /* Shared API */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (71FBE1702D8C0E5C00B3B765 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Shared API"; sourceTree = "<group>"; };
+		71FBE1752D8C0F3600B3B765 /* Image Comments API */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Image Comments API"; sourceTree = "<group>"; };
+		71FBE1762D8C0F7100B3B765 /* Image Comments API */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (71FBE1772D8C0F9900B3B765 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Image Comments API"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -399,6 +408,7 @@
 		080EDEF321B6DA7E00813479 /* EssentialFeed */ = {
 			isa = PBXGroup;
 			children = (
+				71FBE1752D8C0F3600B3B765 /* Image Comments API */,
 				710421E02D7EBBF2001F0DF8 /* Feed API */,
 				7130AE082D2FE925001FD726 /* Feed Cache */,
 				080EDF1021B6DFA200813479 /* Feed Feature */,
@@ -412,13 +422,14 @@
 		080EDEFE21B6DA7E00813479 /* EssentialFeedTests */ = {
 			isa = PBXGroup;
 			children = (
-				71FBE16E2D8C0E1000B3B765 /* Shared API infra */,
-				71FBE16F2D8C0E4D00B3B765 /* Shared API */,
+				710421EA2D7EBBF2001F0DF8 /* Feed API */,
+				71CF23452CF49CCE0013DF22 /* Feed Cache */,
 				718A345B2D4A4DF4009F599E /* Feed Presentation */,
 				7152A1052CE62214006E34D4 /* Helpers */,
-				71CF23452CF49CCE0013DF22 /* Feed Cache */,
+				71FBE1762D8C0F7100B3B765 /* Image Comments API */,
 				080EDF0121B6DA7E00813479 /* Info.plist */,
-				710421EA2D7EBBF2001F0DF8 /* Feed API */,
+				71FBE16F2D8C0E4D00B3B765 /* Shared API */,
+				71FBE16E2D8C0E1000B3B765 /* Shared API infra */,
 			);
 			path = EssentialFeedTests;
 			sourceTree = "<group>";
@@ -627,6 +638,7 @@
 			fileSystemSynchronizedGroups = (
 				710421E02D7EBBF2001F0DF8 /* Feed API */,
 				71FBE1662D8C0BA200B3B765 /* Image Comments Feature */,
+				71FBE1752D8C0F3600B3B765 /* Image Comments API */,
 			);
 			name = EssentialFeedAPI;
 			packageProductDependencies = (
