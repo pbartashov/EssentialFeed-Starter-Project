@@ -248,13 +248,6 @@
 			);
 			target = 080EDEF921B6DA7E00813479 /* EssentialFeedTests */;
 		};
-		71FBE1702D8C0E5C00B3B765 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Helpers/HTTPClientSpy.swift,
-			);
-			target = 710421E52D7EBBF2001F0DF8 /* EssentialFeedAPITests */;
-		};
 		71FBE1712D8C0E7D00B3B765 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -297,7 +290,6 @@
 		71F01F642D0D564F00DD73E7 /* EssentialFeedCacheIntegrationTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = EssentialFeedCacheIntegrationTests; sourceTree = "<group>"; };
 		71FBE1662D8C0BA200B3B765 /* Image Comments Feature */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Image Comments Feature"; sourceTree = "<group>"; };
 		71FBE16E2D8C0E1000B3B765 /* Shared API infra */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (71FBE1722D8C0E9500B3B765 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 71FBE1732D8C0E9500B3B765 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 71FBE1712D8C0E7D00B3B765 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Shared API infra"; sourceTree = "<group>"; };
-		71FBE16F2D8C0E4D00B3B765 /* Shared API */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (71FBE1702D8C0E5C00B3B765 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Shared API"; sourceTree = "<group>"; };
 		71FBE1752D8C0F3600B3B765 /* Image Comments API */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Image Comments API"; sourceTree = "<group>"; };
 		71FBE1762D8C0F7100B3B765 /* Image Comments API */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (71FBE1772D8C0F9900B3B765 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Image Comments API"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -425,7 +417,6 @@
 				7152A1052CE62214006E34D4 /* Helpers */,
 				71FBE1762D8C0F7100B3B765 /* Image Comments API */,
 				080EDF0121B6DA7E00813479 /* Info.plist */,
-				71FBE16F2D8C0E4D00B3B765 /* Shared API */,
 				71FBE16E2D8C0E1000B3B765 /* Shared API infra */,
 			);
 			path = EssentialFeedTests;
