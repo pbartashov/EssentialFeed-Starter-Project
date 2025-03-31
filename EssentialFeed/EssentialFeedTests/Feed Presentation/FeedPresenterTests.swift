@@ -81,7 +81,7 @@ final class EssentialFeedTests: XCTestCase {
         return value
     }
 
-    private final class ViewSpy: FeedView, ResourceLoadingView, FeedErrorView {
+    private final class ViewSpy: FeedView, ResourceLoadingView, ResourceErrorView {
         enum Message: Hashable {
             case display(errorMessage: String?)
             case display(isLoading: Bool)
@@ -90,7 +90,7 @@ final class EssentialFeedTests: XCTestCase {
 
         private(set) var messages: Set<Message> = []
 
-        func display(_ viewModel: FeedErrorViewModel) {
+        func display(_ viewModel: ResourceErrorViewModel) {
             messages.insert(.display(errorMessage: viewModel.message))
         }
 
