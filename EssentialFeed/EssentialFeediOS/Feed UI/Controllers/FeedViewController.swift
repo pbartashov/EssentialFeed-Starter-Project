@@ -100,8 +100,8 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
     }
 }
 
-extension FeedViewController: FeedLoadingView {
-    public func display(_ viewModel: FeedLoadingViewModel) {
+extension FeedViewController: ResourceLoadingView {
+    public func display(_ viewModel: ResourceLoadingViewModel) {
         if viewModel.isLoading {
             refreshControl?.beginRefreshing()
         } else {
