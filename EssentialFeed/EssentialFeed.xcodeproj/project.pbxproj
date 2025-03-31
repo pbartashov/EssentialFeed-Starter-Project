@@ -208,6 +208,8 @@
 		7130AE092D2FE925001FD726 /* FeedStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FeedStore.xcdatamodel; sourceTree = "<group>"; };
 		713297972D9AB49F00B7B56A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ImageComments.strings; sourceTree = "<group>"; };
 		713297992D9AB4BB00B7B56A /* ImageCommentsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsPresenter.swift; sourceTree = "<group>"; };
+		713297A22D9AB58000B7B56A /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/ImageComments.strings"; sourceTree = "<group>"; };
+		713297A32D9AB58500B7B56A /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/ImageComments.strings; sourceTree = "<group>"; };
 		713CAF692D6B49CF00694D41 /* FeedCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCache.swift; sourceTree = "<group>"; };
 		713CAF732D6B51C600694D41 /* FeedImageDataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataCache.swift; sourceTree = "<group>"; };
 		7142AA432CF9EA310055E97E /* LoadFeedFromCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFeedFromCacheUseCaseTests.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 		7132979F2D9AB50A00B7B56A /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				ImageCommentsLocalizationTests.swift,
 				ImageCommentsPresenterTests.swift,
 			);
 			target = 080EDEF921B6DA7E00813479 /* EssentialFeedTests */;
@@ -1089,6 +1092,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				713297972D9AB49F00B7B56A /* en */,
+				713297A22D9AB58000B7B56A /* pt-BR */,
+				713297A32D9AB58500B7B56A /* el */,
 			);
 			name = ImageComments.strings;
 			sourceTree = "<group>";
