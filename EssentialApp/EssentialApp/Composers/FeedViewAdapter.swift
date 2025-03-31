@@ -28,13 +28,15 @@ final class FeedViewAdapter: ResourceView {
             
             let view = FeedImageCellController(
                 viewModel: FeedImagePresenter.map(model),
-                delegate: adapter)
+                delegate: adapter
+            )
 
             adapter.presenter = LoadResourcePresenter(
                 resourceView: WeakRefVirtualProxy(view),
                 loadingView: WeakRefVirtualProxy(view),
                 errorView: WeakRefVirtualProxy(view),
-                mapper: UIImage.tryMake)
+                mapper: UIImage.tryMake
+            )
 
             return view
         })
