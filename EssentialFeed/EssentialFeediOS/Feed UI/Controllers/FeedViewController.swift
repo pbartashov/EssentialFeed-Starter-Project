@@ -12,18 +12,25 @@ public protocol FeedViewControllerDelegate {
     func didRequestFeedRefresh()
 }
 
+public protocol CellController {
+    func view(in tableView: UITableView) -> UITableViewCell
+    func preload()
+    func cancelLoad()
+    func loadImage(for cell: UITableViewCell)
+}
+
 public final class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching {
     @IBOutlet private(set) public var errorView: ErrorView?
-    private var loadingControllers = [IndexPath: FeedImageCellController]()
+    private var loadingControllers = [IndexPath: CellController]()
     private var onViewIsAppearing: ((FeedViewController) -> Void)?
 
     public var delegate: FeedViewControllerDelegate?
 
-    private var tableModel = [FeedImageCellController]() {
+    private var tableModel = [CellController]() {
         didSet { self.tableView.reloadData() }
     }
 
-    private var cellControllers = [IndexPath: FeedImageCellController]()
+    private var cellControllers = [IndexPath: CellController]()
 
     @available(iOS 13, *)
     public convenience init?(coder: NSCoder, delegate: FeedViewControllerDelegate) {
@@ -50,7 +57,7 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
         }
     }
 
-    public func display(_ cellControllers: [FeedImageCellController]) {
+    public func display(_ cellControllers: [CellController]) {
         loadingControllers = [:]
         tableModel = cellControllers
     }
@@ -87,7 +94,7 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
         indexPaths.forEach(cancelCellControlerLoad)
     }
 
-    private func cellController(forRowAt indexPath: IndexPath) -> FeedImageCellController {
+    private func cellController(forRowAt indexPath: IndexPath) -> CellController {
         let controller = tableModel[indexPath.row]
         loadingControllers[indexPath] = controller
 
