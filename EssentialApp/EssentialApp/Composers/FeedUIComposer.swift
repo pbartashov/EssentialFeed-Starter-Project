@@ -20,8 +20,8 @@ public final class FeedUIComposer {
         imageLoader: @escaping (URL) -> FeedImageDataLoader.Publisher
     ) -> ListViewController {
         let presentationAdapter = FeedPresentationAdapter(loader: feedLoader)
-        let feedController = makeFeedViewController(delegate: presentationAdapter, title: FeedPresenter.title)
-        
+        let feedController = makeFeedViewController(title: FeedPresenter.title, onRefresh: presentationAdapter.loadResource)
+
         presentationAdapter.presenter = LoadResourcePresenter(
             resourceView: FeedViewAdapter(controller: feedController, imageLoader: imageLoader),
             loadingView: WeakRefVirtualProxy(feedController),
@@ -32,7 +32,7 @@ public final class FeedUIComposer {
         return feedController
     }
 
-    private static func makeFeedViewController(delegate: FeedViewControllerDelegate, title: String) -> ListViewController {
+    private static func makeFeedViewController(title: String, onRefresh: (() -> Void)?) -> ListViewController {
         let bundle = Bundle(for: ListViewController.self)
         let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
         var feedController: ListViewController
@@ -40,12 +40,12 @@ public final class FeedUIComposer {
         if #available(iOS 13.0, *) {
             feedController = storyboard.instantiateInitialViewController { coder in
                 // Initializer Injection on iOS13+
-                ListViewController(coder: coder, delegate: delegate)
+                ListViewController(coder: coder, onRefresh: onRefresh)
             }!
         } else {
             // Property Injection on older iOS versions
             feedController = storyboard.instantiateInitialViewController() as! ListViewController
-            feedController.delegate = delegate
+            feedController.onRefresh = onRefresh
         }
 
         feedController.title = title
