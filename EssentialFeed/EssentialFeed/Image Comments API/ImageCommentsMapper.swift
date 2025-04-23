@@ -7,6 +7,7 @@
 
 
 import Foundation
+import EssentialFeed
 
 public final class ImageCommentsMapper {
     private struct Root: Decodable {

@@ -38,6 +38,8 @@
 		7130AE122D2FE925001FD726 /* LocalFeedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7130AE062D2FE925001FD726 /* LocalFeedImage.swift */; };
 		713297982D9AB49F00B7B56A /* ImageComments.strings in Resources */ = {isa = PBXBuildFile; fileRef = 713297962D9AB49F00B7B56A /* ImageComments.strings */; };
 		7132979A2D9AB4BB00B7B56A /* ImageCommentsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713297992D9AB4BB00B7B56A /* ImageCommentsPresenter.swift */; };
+		713CA5422DB9051B00853307 /* EssentialFeedAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 710421DF2D7EBBF2001F0DF8 /* EssentialFeedAPI.framework */; };
+		713CA5432DB9051B00853307 /* EssentialFeedAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 710421DF2D7EBBF2001F0DF8 /* EssentialFeedAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		713CAF6A2D6B49CF00694D41 /* FeedCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713CAF692D6B49CF00694D41 /* FeedCache.swift */; };
 		713CAF742D6B51C600694D41 /* FeedImageDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713CAF732D6B51C600694D41 /* FeedImageDataCache.swift */; };
 		7142AA442CF9EA310055E97E /* LoadFeedFromCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7142AA432CF9EA310055E97E /* LoadFeedFromCacheUseCaseTests.swift */; };
@@ -112,6 +114,13 @@
 			remoteGlobalIDString = 080EDEF021B6DA7E00813479;
 			remoteInfo = EssentialFeed;
 		};
+		713CA5442DB9051B00853307 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 080EDEE821B6DA7E00813479 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 710421DE2D7EBBF2001F0DF8;
+			remoteInfo = EssentialFeedAPI;
+		};
 		7152A1142CE8BEAC006E34D4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 080EDEE821B6DA7E00813479 /* Project object */;
@@ -160,6 +169,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				713CA5432DB9051B00853307 /* EssentialFeedAPI.framework in Embed Frameworks */,
 				712A2A152D217FCF005887FC /* EssentialFeed.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -384,6 +394,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				713CA5422DB9051B00853307 /* EssentialFeedAPI.framework in Frameworks */,
 				712A2A142D217FCF005887FC /* EssentialFeed.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -731,6 +742,7 @@
 			);
 			dependencies = (
 				712A2A172D217FCF005887FC /* PBXTargetDependency */,
+				713CA5452DB9051B00853307 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				710D1A3E2D1EDEB600E3270B /* EssentialFeediOS */,
@@ -1079,6 +1091,11 @@
 			target = 080EDEF021B6DA7E00813479 /* EssentialFeed */;
 			targetProxy = 712A2A162D217FCF005887FC /* PBXContainerItemProxy */;
 		};
+		713CA5452DB9051B00853307 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 710421DE2D7EBBF2001F0DF8 /* EssentialFeedAPI */;
+			targetProxy = 713CA5442DB9051B00853307 /* PBXContainerItemProxy */;
+		};
 		7152A1152CE8BEAC006E34D4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 080EDEF021B6DA7E00813479 /* EssentialFeed */;
@@ -1389,7 +1406,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1429,7 +1446,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1461,7 +1478,7 @@
 				DEVELOPMENT_TEAM = 5454Z35HY9;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pB.EssentialFeedAPITests;
@@ -1486,7 +1503,7 @@
 				DEVELOPMENT_TEAM = 5454Z35HY9;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pB.EssentialFeedAPITests;
