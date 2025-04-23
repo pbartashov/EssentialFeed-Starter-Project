@@ -15,6 +15,12 @@ public protocol CellController {
     func loadImage(for cell: UITableViewCell)
 }
 
+public extension CellController {
+    func preload() {}
+    func cancelLoad() {}
+    func loadImage(for cell: UITableViewCell) {}
+}
+
 public final class ListViewController: UITableViewController, UITableViewDataSourcePrefetching {
     @IBOutlet private(set) public var errorView: ErrorView?
     private var loadingControllers = [IndexPath: CellController]()
