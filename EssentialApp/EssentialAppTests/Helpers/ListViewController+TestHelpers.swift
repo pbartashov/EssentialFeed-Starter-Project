@@ -1,5 +1,5 @@
 //
-//  UITableViewController+TestHelpers.swift
+//  ListViewController+TestHelpers.swift
 //  EssentialFeed
 //
 //  Created by Pavel Bartashov on 21/1/2025.
@@ -78,7 +78,7 @@ extension ListViewController {
     }
 
     func simulateTapOnErrorMessage() {
-        errorView?.button.simulateTap()
+        errorView.simulateTap()
     }
 
     func renderedFeedImageData(at index: Int) -> Data? {
@@ -86,7 +86,7 @@ extension ListViewController {
     }
 
     var errorMessage: String? {
-        errorView?.message
+        errorView.message
     }
 
     func replaceRefreshControlWithFakeForiOS17Support() {
