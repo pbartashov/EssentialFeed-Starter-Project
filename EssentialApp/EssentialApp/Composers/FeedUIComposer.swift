@@ -18,7 +18,7 @@ public final class FeedUIComposer {
     public static func feedComposedWith(
         feedLoader: @escaping () -> AnyPublisher<[FeedImage], Error>,
         imageLoader: @escaping (URL) -> FeedImageDataLoader.Publisher
-    ) -> FeedViewController {
+    ) -> ListViewController {
         let presentationAdapter = FeedPresentationAdapter(loader: feedLoader)
         let feedController = makeFeedViewController(delegate: presentationAdapter, title: FeedPresenter.title)
         
@@ -32,19 +32,19 @@ public final class FeedUIComposer {
         return feedController
     }
 
-    private static func makeFeedViewController(delegate: FeedViewControllerDelegate, title: String) -> FeedViewController {
-        let bundle = Bundle(for: FeedViewController.self)
+    private static func makeFeedViewController(delegate: FeedViewControllerDelegate, title: String) -> ListViewController {
+        let bundle = Bundle(for: ListViewController.self)
         let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
-        var feedController: FeedViewController
+        var feedController: ListViewController
 
         if #available(iOS 13.0, *) {
             feedController = storyboard.instantiateInitialViewController { coder in
                 // Initializer Injection on iOS13+
-                FeedViewController(coder: coder, delegate: delegate)
+                ListViewController(coder: coder, delegate: delegate)
             }!
         } else {
             // Property Injection on older iOS versions
-            feedController = storyboard.instantiateInitialViewController() as! FeedViewController
+            feedController = storyboard.instantiateInitialViewController() as! ListViewController
             feedController.delegate = delegate
         }
 

@@ -11,7 +11,7 @@ import EssentialFeediOS
 
 extension FeedUIIntegrationTests {
     func assertThat(
-        _ sut: FeedViewController,
+        _ sut: ListViewController,
         isRendering feed: [FeedImage],
         file: StaticString = #filePath,
         line: UInt = #line
@@ -30,7 +30,7 @@ extension FeedUIIntegrationTests {
     }
     
     func assertThat(
-        _ sut: FeedViewController,
+        _ sut: ListViewController,
         hasViewConfiguredFor image: FeedImage,
         at index: Int = 0,
         file: StaticString = #filePath,
