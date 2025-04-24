@@ -39,11 +39,8 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        dataSource.defaultRowAnimation = .fade
-        tableView.dataSource = dataSource
-
         onViewIsAppearing = { vc in
-            vc.configureErrorView()
+            vc.configureTableView()
             vc.refresh()
             vc.onViewIsAppearing = nil
         }
@@ -55,20 +52,10 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
         }
     }
 
-    private func configureErrorView() {
-        let container = UIView()
-        container.backgroundColor = .clear
-        container.addSubview(errorView)
-
-        errorView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            errorView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-            container.trailingAnchor.constraint(equalTo: errorView.trailingAnchor),
-            errorView.topAnchor.constraint(equalTo: container.topAnchor),
-            container.bottomAnchor.constraint(equalTo: errorView.bottomAnchor),
-        ])
-
-        tableView.tableHeaderView = container
+    private func configureTableView() {
+        dataSource.defaultRowAnimation = .fade
+        tableView.dataSource = dataSource
+        tableView.tableHeaderView = errorView.makeContainer()
 
         errorView.onHide = { [weak self] in
             self?.tableView.beginUpdates()
