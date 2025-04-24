@@ -72,7 +72,12 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
         var snapshot = NSDiffableDataSourceSnapshot<Int, CellController>()
         snapshot.appendSections([0])
         snapshot.appendItems(cellControllers, toSection: 0)
-        dataSource.apply(snapshot)
+
+        if #available(iOS 15.0, *) {
+            dataSource.applySnapshotUsingReloadData(snapshot)
+        } else {
+            dataSource.apply(snapshot)
+        }
     }
 
     public override func viewIsAppearing(_ animated: Bool) {
