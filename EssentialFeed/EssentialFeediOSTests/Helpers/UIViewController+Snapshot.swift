@@ -18,8 +18,8 @@ extension UIViewController {
         let layoutMargins: UIEdgeInsets
         let traitCollection: UITraitCollection
         
-        static func iPhone8(style: UIUserInterfaceStyle, contentSize: UIContentSizeCategory = .medium) -> SnapshotConfiguration {
-            return SnapshotConfiguration(
+        static func iPhone(style: UIUserInterfaceStyle, contentSize: UIContentSizeCategory = .medium) -> SnapshotConfiguration {
+            SnapshotConfiguration(
                 size: CGSize(width: 375, height: 667),
                 safeAreaInsets: UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0),
                 layoutMargins: UIEdgeInsets(top: 20, left: 16, bottom: 0, right: 16),
@@ -38,8 +38,8 @@ extension UIViewController {
     }
     
     private final class SnapshotWindow: UIWindow {
-        private var configuration: SnapshotConfiguration = .iPhone8(style: .light)
-        
+        private var configuration: SnapshotConfiguration = .iPhone(style: .light)
+
         convenience init(configuration: SnapshotConfiguration, root: UIViewController) {
             self.init(frame: CGRect(origin: .zero, size: configuration.size))
             self.configuration = configuration
