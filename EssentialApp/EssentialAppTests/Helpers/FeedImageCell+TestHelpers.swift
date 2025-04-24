@@ -33,7 +33,7 @@ extension FeedImageCell {
         feedImageView.image
     }
 
-    var isShowngRetryAction: Bool {
+    var isShowingRetryAction: Bool {
         !feedImageRetryButton.isHidden
     }
 
