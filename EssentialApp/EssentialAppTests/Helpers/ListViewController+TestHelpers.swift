@@ -9,15 +9,21 @@ import UIKit
 import EssentialFeediOS
 
 extension ListViewController {
+    public override func loadViewIfNeeded() {
+        super.loadViewIfNeeded()
+
+        tableView.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
+    }
+
     var isShowingLoadingIndicator: Bool {
         refreshControl?.isRefreshing == true
     }
 
     var numberOfRenderedImageViews: Int {
-        tableView.numberOfRows(inSection: feedImageSection)
+        tableView.numberOfSections == 0 ? 0 : tableView.numberOfRows(inSection: feedImagesSection)
     }
 
-    private var feedImageSection: Int { 0 }
+    private var feedImagesSection: Int { 0 }
 
     func feedImageView(at row: Int) -> UITableViewCell? {
         guard row < numberOfRenderedImageViews else {
@@ -25,7 +31,7 @@ extension ListViewController {
         }
 
         let ds = tableView.dataSource
-        let index = IndexPath(row: row, section: feedImageSection)
+        let index = IndexPath(row: row, section: feedImagesSection)
 
         return ds?.tableView(tableView, cellForRowAt: index)
     }
@@ -54,7 +60,7 @@ extension ListViewController {
         let view = simulateFeedImageViewVisible(at: row)
 
         let delegate = tableView.delegate
-        let indexPath = IndexPath(row: row, section: feedImageSection)
+        let indexPath = IndexPath(row: row, section: feedImagesSection)
 
         delegate?.tableView?(tableView, didEndDisplaying: view!, forRowAt: indexPath)
 
@@ -63,7 +69,7 @@ extension ListViewController {
 
     func simulateImageViewNearVisible(at row: Int) {
         let ds = tableView.prefetchDataSource
-        let index = IndexPath(row: row, section: feedImageSection)
+        let index = IndexPath(row: row, section: feedImagesSection)
 
         ds?.tableView(tableView, prefetchRowsAt: [index])
     }
@@ -72,7 +78,7 @@ extension ListViewController {
         simulateImageViewNearVisible(at: row)
 
         let ds = tableView.prefetchDataSource
-        let index = IndexPath(row: row, section: feedImageSection)
+        let index = IndexPath(row: row, section: feedImagesSection)
 
         ds?.tableView?(tableView, cancelPrefetchingForRowsAt: [index])
     }
