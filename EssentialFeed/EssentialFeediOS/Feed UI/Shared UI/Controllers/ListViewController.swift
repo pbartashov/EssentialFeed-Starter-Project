@@ -39,11 +39,12 @@ public final class ListViewController: UITableViewController, UITableViewDataSou
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureTableView()
+        configureTraitCollectionObservers()
+
         onViewIsAppearing = { vc in
-            vc.configureTableView()
-            vc.configureTraitCollectionObservers()
-            vc.refresh()
             vc.onViewIsAppearing = nil
+            vc.refresh()
         }
     }
 
