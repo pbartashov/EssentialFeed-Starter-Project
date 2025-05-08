@@ -146,7 +146,7 @@ final class CommentsUIIntegrationTests: XCTestCase {
                     }).eraseToAnyPublisher()
             })
 
-            sut?.loadViewIfNeeded()
+            sut?.simulateAppearance()
         }
 
         XCTAssertEqual(cancelCallCount, 0)
@@ -155,7 +155,7 @@ final class CommentsUIIntegrationTests: XCTestCase {
 
         XCTAssertEqual(cancelCallCount, 1)
     }
-    
+
     // MARK: - Helpers
 
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: ListViewController, loader: LoaderSpy) {
