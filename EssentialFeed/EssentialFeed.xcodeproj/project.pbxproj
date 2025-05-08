@@ -333,6 +333,7 @@
 		71FBE1772D8C0F9900B3B765 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				ImageCommentsEndpointTests.swift,
 				ImageCommentsMapperTests.swift,
 			);
 			target = 710421E52D7EBBF2001F0DF8 /* EssentialFeedAPITests */;
