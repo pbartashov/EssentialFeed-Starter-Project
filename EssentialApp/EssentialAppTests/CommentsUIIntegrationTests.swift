@@ -36,23 +36,23 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
         sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadCommentsCallCount, 3, "Expected yet another loading request once user initiates another reload")
     }
-//
-//    func test_loadingFeedIndicatorIsVisibleWhileLoadingFeed() {
-//        let (sut, loader) = makeSUT()
-//
-//        sut.simulateAppearance()
-//        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
-//
-//        loader.completeFeedLoading(at: 0)
-//        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
-//
-//        sut.simulateUserInitiatedFeedReload()
-//        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
-//
-//        loader.completeFeedLoadingWithError(at: 1)
-//        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
-//    }
-//
+    
+    func test_loadingCommentsIndicator_isVisibleWhileLoadingComments() {
+        let (sut, loader) = makeNewSUT()
+
+        sut.simulateAppearance()
+        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
+
+        loader.completeCommentsLoading(at: 0)
+        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
+
+        sut.simulateUserInitiatedReload()
+        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
+
+        loader.completeCommentsLoadingWithError(at: 1)
+        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
+    }
+
 //    func test_loadFeedCompletion_rendersSuccessfullyLoadedFeed() {
 //        let image0 = makeImage(description: "a description", location: "a location")
 //        let image1 = makeImage(description: nil, location: "another location")
@@ -163,11 +163,11 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
             return publisher.eraseToAnyPublisher()
         }
 
-        func completeFeedLoading(with feed: [FeedImage] = [], at index: Int = 0) {
+        func completeCommentsLoading(with feed: [FeedImage] = [], at index: Int = 0) {
             requests[index].send(feed)
         }
 
-        func completeFeedLoadingWithError(at index: Int = 0) {
+        func completeCommentsLoadingWithError(at index: Int = 0) {
             let error = NSError(domain: "an error", code: 0)
             requests[index].send(completion: .failure(error))
         }
