@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		7190748A2D56318100B12452 /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 719074892D56318100B12452 /* EssentialFeed.framework */; };
 		7190748B2D56318100B12452 /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 719074892D56318100B12452 /* EssentialFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		71FBDE882D7EFD5100B3B765 /* EssentialFeedAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FBDE872D7EFD5100B3B765 /* EssentialFeedAPI.framework */; };
 		71FBDE892D7EFD5100B3B765 /* EssentialFeedAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 71FBDE872D7EFD5100B3B765 /* EssentialFeedAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		71FBDE8A2D7EFD6100B3B765 /* EssentialFeedAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FBDE872D7EFD5100B3B765 /* EssentialFeedAPI.framework */; };
 		71FBDE8B2D7EFD6E00B3B765 /* EssentialFeedAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FBDE872D7EFD5100B3B765 /* EssentialFeedAPI.framework */; };
 		71FBE17D2D8C17A100B3B765 /* EssentialFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FBE17C2D8C17A100B3B765 /* EssentialFeediOS.framework */; };
 		71FBE17E2D8C17A100B3B765 /* EssentialFeediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 71FBE17C2D8C17A100B3B765 /* EssentialFeediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -86,8 +84,6 @@
 			files = (
 				71FBE17D2D8C17A100B3B765 /* EssentialFeediOS.framework in Frameworks */,
 				71FBDE8B2D7EFD6E00B3B765 /* EssentialFeedAPI.framework in Frameworks */,
-				71FBDE8A2D7EFD6100B3B765 /* EssentialFeedAPI.framework in Frameworks */,
-				71FBDE882D7EFD5100B3B765 /* EssentialFeedAPI.framework in Frameworks */,
 				7190748A2D56318100B12452 /* EssentialFeed.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -190,7 +186,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1620;
+				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					719074112D56302400B12452 = {
 						CreatedOnToolsVersion = 16.2;
@@ -272,7 +268,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5454Z35HY9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EssentialApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -304,7 +299,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5454Z35HY9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EssentialApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -364,6 +358,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5454Z35HY9;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -427,6 +422,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 5454Z35HY9;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -455,7 +451,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5454Z35HY9;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				MARKETING_VERSION = 1.0;
@@ -481,7 +476,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5454Z35HY9;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				MARKETING_VERSION = 1.0;
