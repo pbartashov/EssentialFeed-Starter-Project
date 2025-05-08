@@ -13,10 +13,10 @@ import EssentialApp
 import EssentialFeed
 import EssentialFeediOS
 
-final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
+final class CommentsUIIntegrationTests: XCTestCase {
 
     func test_commentsView_hasTitle() {
-        let (sut, _) = makeNewSUT()
+        let (sut, _) = makeSUT()
 
         sut.simulateAppearance()
 
@@ -24,7 +24,7 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
     }
 
     func test_loadCommentsActions_requestCommentsFromLoader() {
-        let (sut, loader) = makeNewSUT()
+        let (sut, loader) = makeSUT()
         XCTAssertEqual(loader.loadCommentsCallCount, 0, "Expected no loading requests before view is loaded")
 
         sut.simulateAppearance()
@@ -36,9 +36,9 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
         sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadCommentsCallCount, 3, "Expected yet another loading request once user initiates another reload")
     }
-    
+
     func test_loadingCommentsIndicator_isVisibleWhileLoadingComments() {
-        let (sut, loader) = makeNewSUT()
+        let (sut, loader) = makeSUT()
 
         sut.simulateAppearance()
         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
@@ -56,7 +56,7 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
     func test_loadCommentsCompletion_rendersSuccessfullyLoadedComments() {
         let comment0 = makeComment(message: "a message", username: "a username")
         let comment1 = makeComment(message: "another message", username: "another username")
-        let (sut, loader) = makeNewSUT()
+        let (sut, loader) = makeSUT()
 
         sut.simulateAppearance()
         assertThat(sut, isRendering: [ImageComment]())
@@ -71,7 +71,7 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
 
     func test_loadCommentsCompletion_rendersSuccessfullyLoadedEmptyCommentsAfterNonEmptyComments() {
         let comment = makeComment()
-        let (sut, loader) = makeNewSUT()
+        let (sut, loader) = makeSUT()
 
         sut.simulateAppearance()
         loader.completeCommentsLoading(with: [comment], at: 0)
@@ -84,7 +84,7 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
 
     func test_loadCommentsCompletion_doesNotAlterCurrentRenderingStateOnError() {
         let comment = makeComment()
-        let (sut, loader) = makeNewSUT()
+        let (sut, loader) = makeSUT()
 
         sut.simulateAppearance()
         loader.completeCommentsLoading(with: [comment], at: 0)
@@ -96,7 +96,7 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
     }
 
     func test_loadCommentsCompletion_dispatchesFromBackgroundToMainThread() {
-        let (sut, loader) = makeNewSUT()
+        let (sut, loader) = makeSUT()
         sut.simulateAppearance()
 
         let exp = expectation(description: "Wait for background queue")
@@ -107,35 +107,35 @@ final class CommentsUIIntegrationTests: FeedUIIntegrationTests {
         wait(for: [exp], timeout: 1.0)
     }
 
-//    func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload() {
-//        let (sut, loader) = makeSUT()
-//
-//        sut.simulateAppearance()
-//        XCTAssertEqual(sut.errorMessage, nil)
-//
-//        loader.completeFeedLoadingWithError(at: 0)
-//        XCTAssertEqual(sut.errorMessage, loadError)
-//
-//        sut.simulateUserInitiatedFeedReload()
-//        XCTAssertEqual(sut.errorMessage, nil)
-//    }
-//
-//    func test_tapOnErrorView_hidesErrorMessage() {
-//        let (sut, loader) = makeSUT()
-//
-//        sut.simulateAppearance()
-//        XCTAssertEqual(sut.errorMessage, nil)
-//
-//        loader.completeFeedLoadingWithError(at: 0)
-//        XCTAssertEqual(sut.errorMessage, loadError)
-//
-//        sut.simulateErrorViewTap()
-//        XCTAssertEqual(sut.errorMessage, nil)
-//    }
-//
+    func test_loadCommentsCompletion_rendersErrorMessageOnErrorUntilNextReload() {
+        let (sut, loader) = makeSUT()
+
+        sut.simulateAppearance()
+        XCTAssertEqual(sut.errorMessage, nil)
+
+        loader.completeCommentsLoadingWithError(at: 0)
+        XCTAssertEqual(sut.errorMessage, loadError)
+
+        sut.simulateUserInitiatedReload()
+        XCTAssertEqual(sut.errorMessage, nil)
+    }
+
+    func test_tapOnErrorView_hidesErrorMessage() {
+        let (sut, loader) = makeSUT()
+
+        sut.simulateAppearance()
+        XCTAssertEqual(sut.errorMessage, nil)
+
+        loader.completeCommentsLoadingWithError(at: 0)
+        XCTAssertEqual(sut.errorMessage, loadError)
+
+        sut.simulateErrorViewTap()
+        XCTAssertEqual(sut.errorMessage, nil)
+    }
+
     // MARK: - Helpers
 
-    private func makeNewSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: ListViewController, loader: LoaderSpy) {
+    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: ListViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
         let sut = CommentsUIComposer.commentsComposedWith(commentsLoader: loader.loadPublisher)
         trackForMemoryLeaks(loader, file: file, line: line)
