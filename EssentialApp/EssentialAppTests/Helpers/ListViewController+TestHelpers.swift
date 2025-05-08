@@ -70,7 +70,7 @@ extension ListViewController {
         return ds?.tableView(tableView, cellForRowAt: index)
     }
 
-    func simulateUserInitiatedFeedReload() {
+    func simulateUserInitiatedReload() {
         refreshControl?.simulatePullToRefresh()
     }
 
