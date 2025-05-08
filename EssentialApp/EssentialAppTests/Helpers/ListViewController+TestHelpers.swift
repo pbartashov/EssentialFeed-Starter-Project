@@ -44,6 +44,15 @@ extension ListViewController {
         refreshControl?.isRefreshing == true
     }
 
+    func simulateTapOnErrorMessage() {
+        errorView.simulateTap()
+    }
+
+
+    var errorMessage: String? {
+        errorView.message
+    }
+
     var numberOfRenderedImageViews: Int {
         tableView.numberOfSections == 0 ? 0 : tableView.numberOfRows(inSection: feedImagesSection)
     }
@@ -109,16 +118,8 @@ extension ListViewController {
         return view
     }
 
-    func simulateTapOnErrorMessage() {
-        errorView.simulateTap()
-    }
-
     func renderedFeedImageData(at index: Int) -> Data? {
         return simulateFeedImageViewVisible(at: index)?.renderedImageData
-    }
-
-    var errorMessage: String? {
-        errorView.message
     }
 }
 
