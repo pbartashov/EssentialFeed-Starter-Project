@@ -12,7 +12,7 @@ import EssentialFeed
 import EssentialFeediOS
 
 
-final class FeedUIIntegrationTests: XCTestCase {
+class FeedUIIntegrationTests: XCTestCase {
 
     func test_feedViewHasTitle() {
         let (sut, _) = makeSUT()
@@ -21,7 +21,7 @@ final class FeedUIIntegrationTests: XCTestCase {
 
         XCTAssertEqual(sut.title, feedTitle)
     }
-    
+
     func test_loadFeedActions_requestFeedFromLoader() {
         let (sut, loader) = makeSUT()
         XCTAssertEqual(loader.loadFeedCallCount, 0, "Expected no loading requests before view appears")
@@ -198,7 +198,7 @@ final class FeedUIIntegrationTests: XCTestCase {
 
         XCTAssertEqual(loader.loadedImageURLs, [image0.url, image0.url, image1.url, image1.url], "Expected two new image URL request after second view becomes visible again")
     }
-    
+
     func test_feedImageViewLoadingIndicator_isVisibleWhileLoadingImage() {
         let (sut, loader) = makeSUT()
         sut.simulateAppearance()
