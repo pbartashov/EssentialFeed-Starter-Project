@@ -142,7 +142,7 @@ class FeedUIIntegrationTests: XCTestCase {
         loader.completeFeedLoadingWithError(at: 0)
         XCTAssertEqual(sut.errorMessage, loadError)
 
-        sut.simulateTapOnErrorMessage()
+        sut.simulateErrorViewTap()
         XCTAssertEqual(sut.errorMessage, nil)
     }
 
@@ -305,11 +305,11 @@ class FeedUIIntegrationTests: XCTestCase {
         loader.completeFeedLoading(with: [image0, image1])
         XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image url requests until image is near visible")
 
-        sut.simulateImageViewNearVisible(at: 0)
+        sut.simulateFeedImageViewNotNearVisible(at: 0)
         XCTAssertEqual(loader.loadedImageURLs, [image0.url], "Expected first image url request once first image is near visible")
 
 
-        sut.simulateImageViewNearVisible(at: 1)
+        sut.simulateFeedImageViewNotNearVisible(at: 1)
         XCTAssertEqual(loader.loadedImageURLs, [image0.url, image1.url], "Expected second image url request once second image is near visible")
     }
 
@@ -322,10 +322,10 @@ class FeedUIIntegrationTests: XCTestCase {
         loader.completeFeedLoading(with: [image0, image1])
         XCTAssertEqual(loader.cancelledImageURLs, [], "Expected no cancelled image url requests until image is not near visible")
 
-        sut.simulateImageViewNearNotVisible(at: 0)
+        sut.simulateFeedImageViewNotNearVisible(at: 0)
         XCTAssertEqual(loader.cancelledImageURLs, [image0.url], "Expected first cancelled image url request once first image is not near visible anymore")
 
-        sut.simulateImageViewNearNotVisible(at: 1)
+        sut.simulateFeedImageViewNotNearVisible(at: 1)
         XCTAssertEqual(loader.cancelledImageURLs, [image0.url, image1.url], "Expected second cancelled image url request once second image is not near visible anymore")
     }
 
