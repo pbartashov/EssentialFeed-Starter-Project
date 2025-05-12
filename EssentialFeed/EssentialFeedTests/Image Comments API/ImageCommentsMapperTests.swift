@@ -17,7 +17,8 @@ class ImageCommentsMapperTests: XCTestCase {
 
         try samples.forEach { code in
             XCTAssertThrowsError(
-                try ImageCommentsMapper.map(json, from: HTTPURLResponse(statusCode: code))
+                try ImageCommentsMapper.map(json, from: HTTPURLResponse(statusCode: code)),
+                "code is \(code)"
             )
         }
     }
@@ -28,7 +29,8 @@ class ImageCommentsMapperTests: XCTestCase {
 
         try samples.forEach { code in
             XCTAssertThrowsError(
-                try ImageCommentsMapper.map(invalidJSON, from: HTTPURLResponse(statusCode: code))
+                try ImageCommentsMapper.map(invalidJSON, from: HTTPURLResponse(statusCode: code)),
+                "code is \(code)"
             )
         }
     }
@@ -80,7 +82,7 @@ class ImageCommentsMapperTests: XCTestCase {
                 "username": username
             ]
         ]
-        
+
         return (item, json)
     }
 
