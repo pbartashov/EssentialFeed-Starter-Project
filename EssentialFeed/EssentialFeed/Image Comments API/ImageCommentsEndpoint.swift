@@ -14,7 +14,7 @@ import Foundation
      public func url(baseURL: URL) -> URL {
          switch self {
          case let .get(id):
-             return baseURL.appendingPathComponent("/v1/image/\(id)/comments")
+                 return baseURL.appendingPathComponent("/v1/image/\(id.uuidString)/comments")
          }
      }
  }
