@@ -59,7 +59,7 @@ final class CommentsUIIntegrationTests: XCTestCase {
         let (sut, loader) = makeSUT()
 
         sut.simulateAppearance()
-        assertThat(sut, isRendering: [ImageComment]())
+        assertThat(sut, isRendering: [])
 
         loader.completeCommentsLoading(with: [comment0], at: 0)
         assertThat(sut, isRendering: [comment0])
@@ -79,7 +79,7 @@ final class CommentsUIIntegrationTests: XCTestCase {
 
         sut.simulateUserInitiatedReload()
         loader.completeCommentsLoading(with: [], at: 1)
-        assertThat(sut, isRendering: [ImageComment]())
+        assertThat(sut, isRendering: [])
     }
 
     func test_loadCommentsCompletion_doesNotAlterCurrentRenderingStateOnError() {
