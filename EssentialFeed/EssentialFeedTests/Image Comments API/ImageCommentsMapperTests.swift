@@ -80,8 +80,8 @@ class ImageCommentsMapperTests: XCTestCase {
                 "username": username
             ]
         ]
-
+        
         return (item, json)
     }
 
-    }
+}
